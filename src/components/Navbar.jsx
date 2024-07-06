@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { NavLink } from 'react-router-dom'
 
 const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'COE', href: '#' },
+  { name: 'Home', href: '/' },
+  { name: 'COE', href: '/COE' },
   { name: 'QIP', href: '#' },
   { name: 'Executive-Training', href: '#' },
   { name: 'Certifcates', href: '#' },
@@ -21,7 +22,7 @@ export default function Navbar() {
           <span className="sr-only">Your Company</span>
           <img src="/iitrprlogo.png" alt="IIT Ropar Logo" className='h-12' />
           <div>
-          <h1 className='text-gray-900 font-bold text-xl tracking-widest'>CEOE</h1>
+          <h1 className='text-gray-900 font-bold text-xl tracking-widest'>CEOA</h1>
           <p className='text-gray-500'>IIT Ropar</p>
           </div>
         </a>
@@ -37,9 +38,9 @@ export default function Navbar() {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-base font-semibold leading-6 text-gray-700">
+            <NavLink key={item.name} to={item.href} className="text-base font-semibold leading-6 text-gray-700">
               {item.name}
-            </a>
+            </NavLink>
           ))}
           
         </div>
@@ -70,13 +71,13 @@ export default function Navbar() {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 {navigation.map((item) => (
-                  <a
+                  <NavLink
                     key={item.name}
-                    href={item.href}
+                    to={item.href}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     {item.name}
-                  </a>
+                  </NavLink>
                 ))}
               </div>
               <div className="py-6">

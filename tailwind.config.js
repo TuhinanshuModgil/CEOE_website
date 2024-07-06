@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       colors:{
-        "tertary-color": "#7e269b"
+        "tertary-color": "#7e269b",
+        "tertary-color-hover": "#9d42d1"
       }
     },
   },

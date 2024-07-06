@@ -2,7 +2,7 @@ export default function Hero() {
     return (
       <div className="relative bg-white">
         <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-24 lg:px-8">
-          <div className="px-6 pb-24 pt-10 sm:pb-32 lg:col-span-7 lg:px-0 lg:pb-56 lg:pt-48 xl:col-span-6">
+          <div className="px-6 pb-24 pt-10 sm:pb-32 lg:col-span-7 lg:px-0 lg:pb-56 lg:pt-32 xl:col-span-6">
             <div className="mx-auto max-w-2xl lg:mx-0">
               
               <div className="hidden sm:mt-32 sm:flex lg:mt-16">
@@ -13,7 +13,7 @@ export default function Hero() {
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-600">
                 
-With the rapid advancements in science and technology and frequent paradigm shifts in policy, governance, and management, continuing education for working professionals is essential for development. The Continuing Education Programme (CEP) office at IIT Ropar has been established to address the knowledge upgrading and upskilling needs of professionals in the S&T industry, academia, and governance.
+                With the rapid advancements in science and technology and frequent paradigm shifts in policy, governance, and management, continuing education for working professionals is essential for development. The Continuing Education Programme (CEP) office at IIT Ropar has been established to address the knowledge upgrading and upskilling needs of professionals in the S&T industry, academia, and governance.
               </p>
               <div className="mt-10 flex items-center gap-x-6">
                 <a

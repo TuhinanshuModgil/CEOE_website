@@ -105,7 +105,7 @@ export default function Footer() {
               <span className="sr-only">Your Company</span>
               <img src="/iitrprlogo.png" alt="IIT Ropar Logo" className='h-12' />
               <div>
-                <h1 className='text-gray-900 font-bold text-xl tracking-widest'>CEOE</h1>
+                <h1 className='text-gray-900 font-bold text-xl tracking-widest'>CEOA</h1>
                 <p className='text-gray-500'>IIT Ropar</p>
               </div>
             </a>
