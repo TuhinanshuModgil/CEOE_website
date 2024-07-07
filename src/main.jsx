@@ -16,6 +16,12 @@ import CEP_UpcomingCourses from './components/CEP_Page/CEP_UpcomingCourses.jsx'
 import CEP_ImportantLinks from './components/CEP_Page/CEP_ImportantLinks.jsx'
 import CEP_FAQs from './components/CEP_Page/CEP_FAQs.jsx'
 import CEP_PreviousCourses from './components/CEP_Page/CEP_PreviousCourses.jsx'
+import QIP_Features from './components/QIP_Page/QIP_Features.jsx'
+import QIP_UpcomingCourses from './components/QIP_Page/QIP_UpcomingCourses.jsx'
+import QIP_ImportantLinks from './components/QIP_Page/QIP_ImportantLinks.jsx'
+import QIP_FAQs from './components/QIP_Page/QIP_FAQs.jsx'
+import QIP_PreviousCourses from './components/QIP_Page/QIP_PreviousCourses.jsx'
+import QIP_content from './components/QIP_Page/QIP_content.jsx'
 
 
 const router = createBrowserRouter([
@@ -44,6 +50,17 @@ const router = createBrowserRouter([
           <CEP_ImportantLinks/>
           <CEP_PreviousCourses/>
           <CEP_FAQs/>
+        </div>
+      },
+      {
+        path:"/QIP",
+        element: <div>
+          <QIP_content/>
+          <QIP_Features/>
+          <QIP_UpcomingCourses/>
+          <QIP_ImportantLinks/>
+          <QIP_PreviousCourses/>
+          <QIP_FAQs/>
         </div>
       }
     ]
