@@ -22,6 +22,12 @@ import QIP_ImportantLinks from './components/QIP_Page/QIP_ImportantLinks.jsx'
 import QIP_FAQs from './components/QIP_Page/QIP_FAQs.jsx'
 import QIP_PreviousCourses from './components/QIP_Page/QIP_PreviousCourses.jsx'
 import QIP_content from './components/QIP_Page/QIP_content.jsx'
+import Exec_Training_Content from './components/Exec_Training_Page/Exec_Training_Content.jsx'
+import Exec_Training_Features from './components/Exec_Training_Page/Exec_Training_Features.jsx'
+import Exec_Training_UpcomingCourses from './components/Exec_Training_Page/Exec_Training_UpcomingCourses.jsx'
+import Exec_Training_ImportantLinks from './components/Exec_Training_Page/Exec_Training_ImportantLinks.jsx'
+import Exec_Training_FAQs from './components/Exec_Training_Page/Exec_Training_FAQs.jsx'
+import Exec_Training_PreviousCourses from './components/Exec_Training_Page/Exec_Training_PreviousCourses.jsx'
 
 
 const router = createBrowserRouter([
@@ -61,6 +67,17 @@ const router = createBrowserRouter([
           <QIP_ImportantLinks/>
           <QIP_PreviousCourses/>
           <QIP_FAQs/>
+        </div>
+      },
+      {
+        path:"/Exec_Training",
+        element: <div>
+          <Exec_Training_Content/>
+          <Exec_Training_Features/>
+          <Exec_Training_UpcomingCourses/>
+          <Exec_Training_ImportantLinks/>
+          <Exec_Training_PreviousCourses/>
+          <Exec_Training_FAQs/>
         </div>
       }
     ]
