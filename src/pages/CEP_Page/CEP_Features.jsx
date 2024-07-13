@@ -1,28 +1,6 @@
 import { InboxIcon, TrashIcon, UsersIcon } from '@heroicons/react/24/outline'
+import { features } from '../../data/siteData'
 
-const features = [
-  {
-    name: 'Top Faculties',
-    description:
-      'Non quo aperiam repellendus quas est est. Eos aut dolore aut ut sit nesciunt. Ex tempora quia. Sit nobis consequatur dolores incidunt.',
-    href: '#',
-    icon: InboxIcon,
-  },
-  {
-    name: 'Air Conditied Classrooms',
-    description:
-      'Vero eum voluptatem aliquid nostrum voluptatem. Vitae esse natus. Earum nihil deserunt eos quasi cupiditate. A inventore et molestiae natus.',
-    href: '#',
-    icon: UsersIcon,
-  },
-  {
-    name: 'Hostel & Mess Facility',
-    description:
-      'Et quod quaerat dolorem quaerat architecto aliquam accusantium. Ex adipisci et doloremque autem quia quam. Quis eos molestiae at iure impedit.',
-    href: '#',
-    icon: TrashIcon,
-  },
-]
 
 export default function CEP_Features() {
   return (
