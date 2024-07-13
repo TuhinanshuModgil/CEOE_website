@@ -109,9 +109,25 @@ export default function Footer() {
                 <p className='text-gray-500'>IIT Ropar</p>
               </div>
             </a>
-            <p className="text-sm leading-6 text-gray-800">
-              Leading the charge towards sustainable solutions
+
+            <div className="text-sm leading-6 text-gray-800">
+            <p>
+              2nd floor, East Wing, Vishvasherya Block,
             </p>
+            <p>
+              Indian Institute of Technology Ropar,
+            </p>
+            <p>
+            Bara Phool, Roopnagar – 140001
+            </p>
+
+            </div>
+            <div className="text-sm leading-6 text-gray-800">
+              <p><span className="font-bold">Phone:</span> +91 011253-011253</p>
+              <p><span className="font-bold">Fax:</span> 011253-011253</p>
+              <p><span className="font-bold">Eamil:</span> deanceoa@admin.iitrpr.ac.in</p>
+            </div>
+            
             <div className="flex space-x-6">
               {navigation.social.map((item) => (
                 <a key={item.name} href={item.href} className="text-gray-700 hover:text-gray-400">

@@ -3,29 +3,25 @@ import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 
 const faqs = [
   {
-    question: "What is CREED?",
+    question: " Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, nesciunt dolore dignissimos quo enim saepe aut sed odio alias maxime? ",
     answer:
-      "The Center of Research for Energy Efficiency and Decarbonisation (CREED) is a pioneering research center established in 2023 at the Indian Institute of Technology, Ropar. It focuses on advancing energy efficiency and decarbonisation through interdisciplinary research and collaborations.",
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quod sint ut repellat molestiae modi quasi voluptatibus alias? Possimus quibusdam molestiae minus recusandae quis excepturi at laboriosam facilis, animi ullam reprehenderit quaerat assumenda earum nulla dolorem, itaque aliquid, eos maxime. ",
   },{
-    question: "Who are the key members of the CREED team?",
+    question: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, nesciunt dolore dignissimos quo enim saepe aut sed odio alias maxime?",
     answer:
-      "Our team comprises ten faculty members, including professors, associate professors, and assistant professors from diverse disciplines, all dedicated to sustainable energy research.",
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, eaque consectetur, vero totam fugiat neque dolores illum sit fuga repellendus sint beatae similique doloribus qui accusamus. Esse architecto ipsam facere sit amet, quaerat laboriosam autem ea reprehenderit mollitia, vel dolorem! ",
   }
   ,{
-    question: "What is the mission of CREED?",
+    question: " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores architecto nihil maiores! Culpa suscipit possimus mollitia, quos officia asperiores quae! ",
     answer:
-      "CREED aims to be a leader in energy research and decarbonisation, fostering collaborations and driving impactful initiatives to promote sustainable energy practices.",
+      " Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet, in? Eveniet, animi. Dignissimos beatae totam neque odit! Neque, voluptatem? Consequuntur fuga, facere ad dolorem exercitationem nihil earum, consequatur veniam quis in facilis amet tenetur quam officia obcaecati fugit animi! Excepturi! ",
   }
   ,{
-    question: "Who are some of CREED's key partners?",
+    question: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur eos nemo libero dolores dicta provident, aperiam nulla quaerat quos natus! ",
     answer:
-      "We have initiated partnerships with the Energy Consortium Centre at IIT Ropar and established strategic collaborations with the Punjab Energy Development Agency (PEDA). These partnerships enhance our collaborative efforts in energy research and innovation.",
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam odit cupiditate, ex, aperiam architecto eum accusantium doloribus consequatur repellat officia enim dolores quos sit optio, consequuntur dolore ipsum. Fuga aperiam aliquam a adipisci, cumque possimus iste doloribus eveniet recusandae cum. ",
   }
-  ,{
-    question: "How does CREED collaborate with industry partners?",
-    answer:
-      "CREED collaborates with various industry partners through paid energy audits, joint research projects, and strategic initiatives aimed at reducing carbon footprints and enhancing energy efficiency.",
-  }
+  
   // More questions...
 ]
 
