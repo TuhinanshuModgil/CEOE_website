@@ -9,7 +9,7 @@ const navigation = [
   { name: 'QIP', href: '/QIP' },
   { name: 'Executive-Training', href: '/Exec_Training' },
   { name: 'Certifcates', href: '/certificate' },
-  { name: 'Contact Us', href: '#' },
+  { name: 'Contact Us', href: '/contactus' },
 ]
 
 export default function Navbar() {

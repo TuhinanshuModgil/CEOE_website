@@ -36,6 +36,7 @@ import {
   Exec_Training_UpcomingCourses
  } from "./pages/Exec_Training_Page";
 import CertificateForm from './pages/Certificate/CertificateForm.jsx'
+import ContactUs from './pages/ContactUs/ContactUs.jsx'
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
       {
         path: "/certificate",
         element: <CertificateForm/>
+      },
+      {
+        path: "/contactus",
+        element: <ContactUs/>
       }
     ]
   }
