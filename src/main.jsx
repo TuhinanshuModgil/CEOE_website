@@ -35,6 +35,7 @@ import {
   Exec_Training_PreviousCourses,
   Exec_Training_UpcomingCourses
  } from "./pages/Exec_Training_Page";
+import CertificateForm from './pages/Certificate/CertificateForm.jsx'
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
           <Exec_Training_PreviousCourses />
           <Exec_Training_FAQs />
         </div>
+      },
+      {
+        path: "/certificate",
+        element: <CertificateForm/>
       }
     ]
   }
@@ -92,6 +97,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-
   </React.StrictMode>,
 )

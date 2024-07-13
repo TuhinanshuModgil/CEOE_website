@@ -8,7 +8,7 @@ const navigation = [
   { name: 'COE', href: '/COE' },
   { name: 'QIP', href: '/QIP' },
   { name: 'Executive-Training', href: '/Exec_Training' },
-  { name: 'Certifcates', href: '#' },
+  { name: 'Certifcates', href: '/certificate' },
   { name: 'Contact Us', href: '#' },
 ]
 
