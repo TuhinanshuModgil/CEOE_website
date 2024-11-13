@@ -37,6 +37,7 @@ import {
  } from "./pages/Exec_Training_Page";
 import CertificateForm from './pages/Certificate/CertificateForm.jsx'
 import ContactUs from './pages/ContactUs/ContactUs.jsx'
+import Announcements from './pages/Home/Announcements.jsx'
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,8 @@ const router = createBrowserRouter([
           <Hero />
           <AboutUs />
           <Services />
-          <UpcomingCourses />
+          <Announcements/>
+          {/* <UpcomingCourses /> */}
           <OurTeam />
           <FAQ />
         </div>

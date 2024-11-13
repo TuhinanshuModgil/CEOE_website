@@ -6,8 +6,9 @@ import { NavLink } from 'react-router-dom'
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'COE', href: '/COE' },
-  { name: 'QIP', href: '/QIP' },
   { name: 'Executive-Training', href: '/Exec_Training' },
+  { name: 'QIP', href: '/QIP' },
+  { name: 'Other', href: '/others' },
   { name: 'Certifcates', href: '/certificate' },
   { name: 'Contact Us', href: '/contactus' },
 ]
@@ -18,12 +19,13 @@ export default function Navbar() {
   return (
     <header className="bg-white border-b fixed top-0 z-10 right-0 left-0 ">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <a href="#" className="-m-1.5 p-1.5 flex gap-4">
+        <a href="#" className="-m-1.5 p-1.5 flex gap-4 items-center">
           <span className="sr-only">Your Company</span>
           <img src="/iitrprlogo.png" alt="IIT Ropar Logo" className='h-12' />
           <div>
-          <h1 className='text-gray-900 font-bold text-xl tracking-widest'>CEOA</h1>
-          <p className='text-gray-500'>IIT Ropar</p>
+          <h1 className='text-gray-900 text-sm sm:text-lg sm:w-64 font-semibold'>Contuning Education and </h1>
+          <h1 className='text-gray-900 text-sm sm:text-lg sm:w-64 font-semibold'>Outreach Activity, IIT Ropar</h1>
+          {/* <p className='text-gray-500'></p> */}
           </div>
         </a>
         <div className="flex lg:hidden">

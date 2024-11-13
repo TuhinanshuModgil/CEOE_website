@@ -123,7 +123,7 @@ export default function Footer() {
 
             </div>
             <div className="text-sm leading-6 text-gray-800">
-              <p><span className="font-bold">Phone:</span> +91 011253-011253</p>
+              <p><span className="font-bold">Phone:</span> +91 11255-32553</p>
               <p><span className="font-bold">Fax:</span> 011253-011253</p>
               <p><span className="font-bold">Eamil:</span> deanceoa@admin.iitrpr.ac.in</p>
             </div>
