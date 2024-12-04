@@ -7,6 +7,7 @@ import {
   FingerPrintIcon,
   SquaresPlusIcon,
 } from '@heroicons/react/24/outline'
+import { Navigate, NavLink } from 'react-router-dom'
 
 
 
@@ -29,13 +30,11 @@ export default function Dropdown({options}) {
                 {/* <div className="mt-1 flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                   <item.icon aria-hidden="true" className="size-6 text-gray-600 group-hover:text-indigo-600" />
                 </div> */}
-                <div>
-                  <a href={item.href} className="font-semibold text-gray-900" title={item.description}>
-                    {item.name}
-                    {/* <span className="absolute inset-0" /> */}
-                  </a>
+                  <NavLink to={item.href} className="font-semibold text-gray-900 w-full" title={item.description}>
+                  {item.name}
+                  </NavLink>
+                
                   {/* <p className="mt-1 text-gray-600">{item.description}</p> */}
-                </div>
               </div>
             ))}
           </div>

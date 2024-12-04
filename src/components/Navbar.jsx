@@ -16,7 +16,7 @@ const navigation = [
 
 const othersOptions = [
   { name: 'QIP', description: 'Quality Improvement Programme', href: '/QIP' },
-  { name: 'Workshops', description: 'Workshops', href: '#'},
+  { name: 'Workshops', description: 'Workshops', href: '/'},
 ]
 
 export default function Navbar() {
