@@ -38,6 +38,8 @@ import {
 import CertificateForm from './pages/Certificate/CertificateForm.jsx'
 import ContactUs from './pages/ContactUs/ContactUs.jsx'
 import Announcements from './pages/Home/Announcements.jsx'
+import Registration from './pages/Authentication/Registration.jsx'
+import CourseDetails from './pages/CourseDetails/CourseDetails.jsx'
 
 const router = createBrowserRouter([
   {
@@ -72,9 +74,9 @@ const router = createBrowserRouter([
         element: <div>
           <QIP_content />
           <QIP_Features />
-          <QIP_UpcomingCourses />
-          <QIP_ImportantLinks />
-          <QIP_PreviousCourses />
+          {/* <QIP_UpcomingCourses /> */}
+          {/* <QIP_ImportantLinks /> */}
+          {/* <QIP_PreviousCourses /> */}
           <QIP_FAQs />
         </div>
       },
@@ -96,6 +98,14 @@ const router = createBrowserRouter([
       {
         path: "/contactus",
         element: <ContactUs/>
+      },
+      {
+        path: "/register",
+        element: <Registration/>
+      } ,
+      {
+        path: "/course/:id",
+        element: <CourseDetails/>
       }
     ]
   }

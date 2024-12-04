@@ -4,13 +4,13 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom'
 
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'COE', href: '/COE' },
-  { name: 'Executive-Training', href: '/Exec_Training' },
-  { name: 'QIP', href: '/QIP' },
-  { name: 'Other', href: '/others' },
-  { name: 'Certifcates', href: '/certificate' },
-  { name: 'Contact Us', href: '/contactus' },
+  { name: 'Home', href: '/', title: "Home" },
+  { name: 'CEP', href: '/COE', title: "Contuning Education Programme" },
+  { name: 'Executive-Training', href: '/Exec_Training', title: "Executive-Training" },
+  { name: 'QIP', href: '/QIP', title: "Quality Improvement Programme" },
+  { name: 'Other', href: '/others', title: "" },
+  { name: 'Certifcates', href: '/certificate', title: "" },
+  { name: 'Contact Us', href: '/contactus', title: "" },
 ]
 
 export default function Navbar() {
@@ -19,7 +19,7 @@ export default function Navbar() {
   return (
     <header className="bg-white border-b fixed top-0 z-10 right-0 left-0 ">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <a href="#" className="-m-1.5 p-1.5 flex gap-4 items-center">
+        <a href="/" className="-m-1.5 p-1.5 flex gap-4 items-center">
           <span className="sr-only">Your Company</span>
           <img src="/iitrprlogo.png" alt="IIT Ropar Logo" className='h-12' />
           <div>
@@ -41,7 +41,10 @@ export default function Navbar() {
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map((item) => (
             <NavLink key={item.name} to={item.href} className="text-base font-semibold leading-6 text-gray-700">
+              <div title= {item?.title}>
+
               {item.name}
+              </div>
             </NavLink>
           ))}
           
