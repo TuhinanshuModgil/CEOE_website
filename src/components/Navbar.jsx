@@ -6,7 +6,7 @@ import Dropdown from './Dropdown'
 
 const navigation = [
   { name: 'Home', href: '/', title: "Home" },
-  { name: 'CEP', href: '/COE', title: "Contuning Education Programme" },
+  { name: 'CEP', href: '/COE', title: "Continuing Education Programme" },
   { name: 'Executive-Training', href: '/Exec_Training', title: "Executive-Training" },
   // { name: 'QIP', href: '/QIP', title: "Quality Improvement Programme" },
   // { name: 'Other', href: '/others', title: "" },
@@ -29,7 +29,7 @@ export default function Navbar() {
           <span className="sr-only">Your Company</span>
           <img src="/iitrprlogo.png" alt="IIT Ropar Logo" className='h-12' />
           <div>
-          <h1 className='text-gray-900 text-sm sm:text-lg sm:w-64 font-semibold'>Contuning Education and </h1>
+          <h1 className='text-gray-900 text-sm sm:text-lg sm:w-64 font-semibold'>Continuing Education and </h1>
           <h1 className='text-gray-900 text-sm sm:text-lg sm:w-64 font-semibold'>Outreach Activity, IIT Ropar</h1>
           {/* <p className='text-gray-500'></p> */}
           </div>

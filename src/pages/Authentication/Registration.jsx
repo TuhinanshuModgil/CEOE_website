@@ -30,7 +30,7 @@ export default function Registration() {
             <img src="/iitrprlogo.png" alt="IIT Ropar Logo" className="h-24" />
             <div>
               <h1 className="text-gray-900 text-sm sm:text-lg sm:w-64 font-semibold text-center" >
-                Contuning Education and Outreach Activity, IIT Ropar
+                Continuing Education and Outreach Activity, IIT Ropar
               </h1>
             
               {/* <p className='text-gray-500'></p> */}
