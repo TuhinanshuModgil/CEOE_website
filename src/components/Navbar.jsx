@@ -1,37 +1,60 @@
-import { useState } from 'react'
-import { Dialog, DialogPanel } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { NavLink } from 'react-router-dom'
-import Dropdown from './Dropdown'
+import { useState } from "react";
+import { Dialog, DialogPanel } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { NavLink } from "react-router-dom";
+import Dropdown from "./Dropdown";
+import LoginModal from "./auth/LoginModal";
+import RegisterModal from "./auth/RegisterModal";
 
 const navigation = [
-  { name: 'Home', href: '/', title: "Home" },
-  { name: 'CEP', href: '/COE', title: "Continuing Education Programme" },
-  { name: 'Executive-Training', href: '/Exec_Training', title: "Executive-Training" },
+  // { name: 'Home', href: '/', title: "Home" },
+  { name: "CEP", href: "/COE", title: "Continuing Education Programme" },
+  {
+    name: "Executive-Training",
+    href: "/Exec_Training",
+    title: "Executive-Training",
+  },
   // { name: 'QIP', href: '/QIP', title: "Quality Improvement Programme" },
   // { name: 'Other', href: '/others', title: "" },
-  { name: 'Certifcates', href: '/certificate', title: "" },
-  { name: 'Contact Us', href: '/contactus', title: "" },
-]
+  { name: "Contact Us", href: "/contactus", title: "" },
+];
 
 const othersOptions = [
-  { name: 'QIP', description: 'Quality Improvement Programme', href: '/QIP' },
-  { name: 'Workshops', description: 'Workshops', href: '/'},
-]
+  { name: "QIP", description: "Quality Improvement Programme", href: "/QIP" },
+  { name: "Workshops", description: "Workshops", href: "/" },
+  { name: "Certifcates", href: "/certificate", description: "Certifcates" },
+];
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [loginModlalOpen, setLoginModalOpen] = useState(true);
+  const [signupModalOpen, setSignupModalOpen] = useState(false);
+
+  function handleLoginToggle(){
+    setLoginModalOpen(prev=> !prev)
+  }
+
+  function handleSignupToggle(){
+    setSignupModalOpen(prev=> !prev)
+  }
 
   return (
     <header className="bg-white border-b fixed top-0 z-10 right-0 left-0 ">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8 text-base font-semibold leading-6 text-gray-700"
+        aria-label="Global"
+      >
         <a href="/" className="-m-1.5 p-1.5 flex gap-4 items-center">
           <span className="sr-only">Your Company</span>
-          <img src="/iitrprlogo.png" alt="IIT Ropar Logo" className='h-12' />
+          <img src="/iitrprlogo.png" alt="IIT Ropar Logo" className="h-12" />
           <div>
-          <h1 className='text-gray-900 text-sm sm:text-lg sm:w-64 font-semibold'>Continuing Education and </h1>
-          <h1 className='text-gray-900 text-sm sm:text-lg sm:w-64 font-semibold'>Outreach Activity, IIT Ropar</h1>
-          {/* <p className='text-gray-500'></p> */}
+            <h1 className="text-gray-900 text-sm sm:text-lg sm:w-64 font-semibold">
+              Continuing Education and{" "}
+            </h1>
+            <h1 className="text-gray-900 text-sm sm:text-lg sm:w-64 font-semibold">
+              Outreach Activity, IIT Ropar
+            </h1>
+            {/* <p className='text-gray-500'></p> */}
           </div>
         </a>
         <div className="flex lg:hidden">
@@ -44,25 +67,30 @@ export default function Navbar() {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12">
+        <div className="hidden lg:flex lg:gap-x-8">
           {navigation.map((item) => (
-            <NavLink key={item.name} to={item.href} className="text-base font-semibold leading-6 text-gray-700">
-              <div title= {item?.title}>
-
-              {item.name}
-              </div>
+            <NavLink
+              key={item.name}
+              to={item.href}
+              className="text-base font-semibold leading-6 text-gray-700"
+            >
+              <div title={item?.title}>{item.name}</div>
             </NavLink>
           ))}
-          <Dropdown options={othersOptions}/>
-
+          <Dropdown options={othersOptions} />
+          <button onClick={handleLoginToggle}>Login</button>
+          <button onClick={handleSignupToggle}>Register</button>
         </div>
       </nav>
-      <Dialog className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+      <Dialog
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-
               <span className="sr-only">Your Company</span>
               <img
                 className="h-8 w-auto"
@@ -92,13 +120,31 @@ export default function Navbar() {
                   </NavLink>
                 ))}
                 <Dropdown options={othersOptions} />
+                <button>Login</button>
+                <button>Register</button>
+
               </div>
-              <div className="py-6">
-              </div>
+              <div className="py-6"></div>
             </div>
           </div>
         </DialogPanel>
       </Dialog>
+
+      {loginModlalOpen ? (
+        <div className="fixed top-0 left-0 w-screen h-screen bg-gray-600/50  z-[100]">
+          <LoginModal handleLoginToogle={handleLoginToggle} />
+        </div>
+      ) : (
+        <></>
+      )}
+
+      {signupModalOpen ? (
+        <div className="fixed top-0 left-0 w-screen h-screen bg-gray-600/50  z-[100]">
+          <RegisterModal handleSignupToggle={handleSignupToggle}/>
+        </div>
+      ) : (
+        <></>
+      )}
     </header>
-  )
+  );
 }
