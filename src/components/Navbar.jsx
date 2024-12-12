@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import LoginModal from "./auth/LoginModal";
 import RegisterModal from "./auth/RegisterModal";
+import { useAuthContext } from "../context/authContext";
 
 const navigation = [
   // { name: 'Home', href: '/', title: "Home" },
@@ -29,13 +30,14 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginModlalOpen, setLoginModalOpen] = useState(false);
   const [signupModalOpen, setSignupModalOpen] = useState(false);
-
-  function handleLoginToggle(){
-    setLoginModalOpen(prev=> !prev)
+  const { userLoggedIn, handleLogout } = useAuthContext();
+  console.log("User Logged In: ", userLoggedIn);
+  function handleLoginToggle() {
+    setLoginModalOpen((prev) => !prev);
   }
 
-  function handleSignupToggle(){
-    setSignupModalOpen(prev=> !prev)
+  function handleSignupToggle() {
+    setSignupModalOpen((prev) => !prev);
   }
 
   return (
@@ -78,8 +80,17 @@ export default function Navbar() {
             </NavLink>
           ))}
           <Dropdown options={othersOptions} />
-          <button onClick={handleLoginToggle}>Login</button>
-          <button onClick={handleSignupToggle}>Register</button>
+          {userLoggedIn ? (
+            <>
+            <button onClick={handleLogout}>Logout</button>
+          </>
+            
+          ) : (
+            <>
+              <button onClick={handleLoginToggle}>Login</button>
+              <button onClick={handleSignupToggle}>Register</button>
+            </>
+          )}
         </div>
       </nav>
       <Dialog
@@ -122,7 +133,6 @@ export default function Navbar() {
                 <Dropdown options={othersOptions} />
                 <button>Login</button>
                 <button>Register</button>
-
               </div>
               <div className="py-6"></div>
             </div>
@@ -140,7 +150,7 @@ export default function Navbar() {
 
       {signupModalOpen ? (
         <div className="fixed top-0 left-0 w-screen h-screen bg-gray-600/50  z-[100]">
-          <RegisterModal handleSignupToggle={handleSignupToggle}/>
+          <RegisterModal handleSignupToggle={handleSignupToggle} />
         </div>
       ) : (
         <></>

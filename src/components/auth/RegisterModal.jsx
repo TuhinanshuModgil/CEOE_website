@@ -1,44 +1,27 @@
 import { useState } from "react";
+import { useAuthContext } from "../../context/authContext";
 
 export default function RegisterModal({handleSignupToggle}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const {handleRegisterUser} = useAuthContext()
+
+
   
-  const backend =  import.meta.env.VITE_BACKEND_HOST
   async function handleUserRegister(event) {
 
     event.preventDefault()
     // console.log("this is evnet:", event)
     console.log("fullanme: ", fullName)
     console.log("emailemail: ",email)
-    console.log("password: ", password)
+    // console.log("password: ", password)
 
-    try {
-      const response = await fetch(`${backend}/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ email, password, fullname:fullName }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setSuccessMessage(data.message);
-        localStorage.setItem('token', data.token); // Save token for authentication
-        
-      } else {
-        const errorData = await response.json();
-        console.log("Resgister failed", errorData)
-        setErrorMessage(errorData.message || 'An error occurred');
+    handleRegisterUser(fullName, email, password).then((res)=>{
+      if(res){
+        handleSignupToggle()
       }
-    } catch (error) {
-      setErrorMessage('Failed to connect to the server');
-    }
+    })
 
 
   }

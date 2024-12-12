@@ -1,4 +1,23 @@
+import { useState } from "react";
+import { useAuthContext } from "../../context/authContext";
+
 export default function LoginModal({ handleLoginToogle }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { handleLogin } = useAuthContext();
+  function handleUserLogin(event) {
+    event.preventDefault()
+    console.log("emailemail: ",email)
+    // console.log("password: ", password)
+
+    handleLogin( email, password).then((res)=>{
+      if(res){
+        handleLoginToogle()
+      }
+    })
+
+  }
+
   return (
     <>
       {/*
@@ -11,7 +30,10 @@ export default function LoginModal({ handleLoginToogle }) {
         */}
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 ">
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px] relative">
-          <button className="text-black absolute z-[100] right-5 top-5" onClick={handleLoginToogle}>
+          <button
+            className="text-black absolute z-[100] right-5 top-5"
+            onClick={handleLoginToogle}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -40,7 +62,12 @@ export default function LoginModal({ handleLoginToogle }) {
               </h2>
             </div>
 
-            <form action="#" method="POST" className="space-y-6">
+            <form
+              action="#"
+              method="POST"
+              className="space-y-6"
+              onSubmit={handleUserLogin}
+            >
               <div>
                 <label
                   htmlFor="email"
@@ -54,6 +81,8 @@ export default function LoginModal({ handleLoginToogle }) {
                     name="email"
                     type="email"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
@@ -72,6 +101,8 @@ export default function LoginModal({ handleLoginToogle }) {
                     id="password"
                     name="password"
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     autoComplete="current-password"
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"

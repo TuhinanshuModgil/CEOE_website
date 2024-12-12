@@ -40,6 +40,7 @@ import ContactUs from './pages/ContactUs/ContactUs.jsx'
 import Announcements from './pages/Home/Announcements.jsx'
 import Registration from './pages/Authentication/Registration.jsx'
 import CourseDetails from './pages/CourseDetails/CourseDetails.jsx'
+import { AuthContextProvider } from './context/authContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -113,6 +114,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthContextProvider>
     <RouterProvider router={router} />
+    </AuthContextProvider>
   </React.StrictMode>,
 )
