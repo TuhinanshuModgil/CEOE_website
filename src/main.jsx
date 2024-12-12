@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         </div>
       },
       {
-        path: "/COE",
+        path: "/CEP",
         element: <div>
           <CEP_Content />
           <CEP_Features />

@@ -1,4 +1,48 @@
+import { useState } from "react";
+
 export default function RegisterModal({handleSignupToggle}) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  
+  const backend =  import.meta.env.VITE_BACKEND_HOST
+  async function handleUserRegister(event) {
+
+    event.preventDefault()
+    // console.log("this is evnet:", event)
+    console.log("fullanme: ", fullName)
+    console.log("emailemail: ",email)
+    console.log("password: ", password)
+
+    try {
+      const response = await fetch(`${backend}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ email, password, fullname:fullName }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setSuccessMessage(data.message);
+        localStorage.setItem('token', data.token); // Save token for authentication
+        
+      } else {
+        const errorData = await response.json();
+        console.log("Resgister failed", errorData)
+        setErrorMessage(errorData.message || 'An error occurred');
+      }
+    } catch (error) {
+      setErrorMessage('Failed to connect to the server');
+    }
+
+
+  }
+
   return (
     <>
       {/*
@@ -38,7 +82,7 @@ export default function RegisterModal({handleSignupToggle}) {
                 Register your account
               </h2>
             </div>
-            <form action="#" method="POST" className="space-y-4">
+            <form className="space-y-4" onSubmit={handleUserRegister}>
             <div>
                 <label
                   htmlFor="fullname"
@@ -51,6 +95,8 @@ export default function RegisterModal({handleSignupToggle}) {
                     id="fullname"
                     name="fullname"
                     type="text"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
                     required
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
@@ -68,6 +114,8 @@ export default function RegisterModal({handleSignupToggle}) {
                     id="email"
                     name="email"
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                     autoComplete="email"
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -87,6 +135,8 @@ export default function RegisterModal({handleSignupToggle}) {
                     id="password"
                     name="password"
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     autoComplete="current-password"
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"

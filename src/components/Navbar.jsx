@@ -8,7 +8,7 @@ import RegisterModal from "./auth/RegisterModal";
 
 const navigation = [
   // { name: 'Home', href: '/', title: "Home" },
-  { name: "CEP", href: "/COE", title: "Continuing Education Programme" },
+  { name: "CEP", href: "/CEP", title: "Continuing Education Programme" },
   {
     name: "Executive-Training",
     href: "/Exec_Training",
@@ -27,7 +27,7 @@ const othersOptions = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [loginModlalOpen, setLoginModalOpen] = useState(true);
+  const [loginModlalOpen, setLoginModalOpen] = useState(false);
   const [signupModalOpen, setSignupModalOpen] = useState(false);
 
   function handleLoginToggle(){
