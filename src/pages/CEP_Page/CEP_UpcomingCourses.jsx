@@ -10,7 +10,7 @@ import { posts } from "../../data/siteData"
             <p className="mt-2 text-lg leading-8 text-gray-600">
             </p>
           </div>
-          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <div className="mx-auto mt-16 grid grid-flow-col auto-cols-[80%] sm:auto-cols-[40%] lg:auto-cols-[31%] gap-3 overflow-x-auto overscroll-x-contain">
             {posts.map((post) => (
               <article key={post.id} className="flex flex-col items-start justify-between border p-4 rounded-2xl shadow">
                 <div className="relative w-full">

@@ -25,8 +25,8 @@ const courseDetails = {
   endDate: "31/12/2024",
   paymentInstructions: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum corporis, totam, consectetur mollitia autem sunt dicta similique at qui omnis consequatur blanditiis temporibus esse rem, incidunt laudantium laboriosam maxime neque.",
   paymentLinks: [
-    { name: 'Payment Brocher', initials: 'PB', href: '#', members: 16, bgColor: 'bg-pink-600' },
-    { name: 'SBI Collect Link', initials: 'SB', href: '#', members: 12, bgColor: 'bg-purple-600' },
+    { linkTitle: 'Payment Brocher', linkDescription: 'djsja dsjkajda djajd dadasdsj djajd adjdsj djs jsadas djsadsj', href: '#' },
+    { linkTitle: 'SBI Collect Link', linkDescription: 'djsja dsjkajda djajd dadasdsj djajd adjdsj djs jsadas djsadsj', href: '#' },
 
   ],
   brocherLink: 'https://google.com'
