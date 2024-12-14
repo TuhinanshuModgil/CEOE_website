@@ -1,36 +1,38 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/20/solid'
 import { Radio, RadioGroup } from '@headlessui/react'
 import { ShieldCheckIcon } from '@heroicons/react/24/outline'
 import { useParams } from 'react-router-dom'
 import ImportantLinks from '../../components/ImportantLinks'
 
-const courseDetails = {
-  name: 'Course Title',
-  mode: 'Online',
-  href: '#',
-  courseCode: 'CBF1020',
-  description:" Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi earum unde est minima, similique voluptatum. Earum placeat, corporis vero quo hic obcaecati dolorem nulla at? Dicta, aperiam eligendi dolorum repudiandae consectetur magnam molestiae quia nemo accusantium eveniet cum deleniti distinctio. Ut eveniet quos officia minima culpa sed aliquid nam ex?",
-  imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-04-featured-product-shot.jpg',
-  imageAlt: 'Model wearing light green backpack with black canvas straps and front zipper pouch.',
-  faculties: ["Faculty 1", "Faculty 2"],
-  eligibility: [
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, molestias.",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. .",
-    "Lorem ipsum dolor sit amet  adipisicing elit. Quisquam, molestias.",
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, molestias.",
-  ],
-  startDate: "29/10/2024",
-  endDate: "31/12/2024",
-  paymentInstructions: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum corporis, totam, consectetur mollitia autem sunt dicta similique at qui omnis consequatur blanditiis temporibus esse rem, incidunt laudantium laboriosam maxime neque.",
-  paymentLinks: [
-    { linkTitle: 'Payment Brocher', linkDescription: 'djsja dsjkajda djajd dadasdsj djajd adjdsj djs jsadas djsadsj', href: '#' },
-    { linkTitle: 'SBI Collect Link', linkDescription: 'djsja dsjkajda djajd dadasdsj djajd adjdsj djs jsadas djsadsj', href: '#' },
+const backend = import.meta.env.VITE_BACKEND_HOST;
 
-  ],
-  brocherLink: 'https://google.com'
-}
+// const courseDetails = {
+//   name: 'Course Title',
+//   mode: 'Online',
+//   href: '#',
+//   courseCode: 'CBF1020',
+//   description:" Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi earum unde est minima, similique voluptatum. Earum placeat, corporis vero quo hic obcaecati dolorem nulla at? Dicta, aperiam eligendi dolorum repudiandae consectetur magnam molestiae quia nemo accusantium eveniet cum deleniti distinctio. Ut eveniet quos officia minima culpa sed aliquid nam ex?",
+//   imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/product-page-04-featured-product-shot.jpg',
+//   imageAlt: 'Model wearing light green backpack with black canvas straps and front zipper pouch.',
+//   faculties: ["Faculty 1", "Faculty 2"],
+//   eligibility: [
+//     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, molestias.",
+//     "Lorem ipsum dolor sit amet consectetur adipisicing elit. .",
+//     "Lorem ipsum dolor sit amet  adipisicing elit. Quisquam, molestias.",
+//     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, molestias.",
+//   ],
+//   startDate: "29/10/2024",
+//   endDate: "31/12/2024",
+//   paymentInstructions: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum corporis, totam, consectetur mollitia autem sunt dicta similique at qui omnis consequatur blanditiis temporibus esse rem, incidunt laudantium laboriosam maxime neque.",
+//   paymentLinks: [
+//     { linkTitle: 'Payment Brocher', linkDescription: 'djsja dsjkajda djajd dadasdsj djajd adjdsj djs jsadas djsadsj', href: '#' },
+//     { linkTitle: 'SBI Collect Link', linkDescription: 'djsja dsjkajda djajd dadasdsj djajd adjdsj djs jsadas djsadsj', href: '#' },
+
+//   ],
+//   brocherLink: 'https://google.com'
+// }
 const reviews = { average: 4, totalCount: 1624 }
 
 function classNames(...classes) {
@@ -38,7 +40,46 @@ function classNames(...classes) {
 }
 
 export default function CourseDetails() {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [courseDetails, setCourseDetails] = useState({})
     const {id} = useParams()
+
+
+  useEffect(()=>{
+    async function fetchCourses() {
+      try {
+        const response = await fetch(`${backend}/course/single/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Data fetching Succesfully", data);
+          setSuccessMessage(data.message);
+          
+          
+          setCourseDetails(data.data)
+          // console.log(This )
+          return true;
+          // localStorage.setItem('token', data.token); // Save token for authentication
+        } else {
+          const errorData = await response.json();
+          console.log("failed to fetch data", errorData);
+          setErrorMessage(errorData.message || "An error occurred");
+          return false;
+        }
+      } catch (error) {
+        console.log("Error in fetching courses: ", error.message);
+      }
+    }
+    fetchCourses()
+  }
+    , [])
 //   const [selectedSize, setSelectedSize] = useState(courseDetails.sizes[0])
 
   return (
@@ -76,14 +117,14 @@ export default function CourseDetails() {
 
           <section aria-labelledby="information-heading" className="mt-4">
             <h2 id="information-heading" className="sr-only">
-              Product information
+              Course Information
             </h2>
 
             <div className="flex items-center">
               <p className="text-gray-700 "> <span className='text-gray-600'>Course Code: </span> {courseDetails.courseCode}</p>
 
               <div className="ml-4 border-l border-gray-300 pl-4">
-                <h2 className="sr-only">Reviews</h2>
+                <h2 className="sr-only">Mode</h2>
                 <div className="flex items-center">
                 <span className='text-gray-600'>Mode: {courseDetails.mode}</span>
                
@@ -117,7 +158,7 @@ export default function CourseDetails() {
 
         {/* courseDetails image */}
         <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
-          <img alt={courseDetails.imageAlt} src={courseDetails.imageSrc} className="aspect-square w-full rounded-lg object-cover" />
+          <img alt={courseDetails.imageAlt} src={courseDetails?.image?.data} className="aspect-square w-full rounded-lg object-cover" />
         </div>
 
         {courseDetails.brocherLink ? <a href={courseDetails.brocherLink} className='text-blue-500 underline mt-4'>Downlaod Brocher</a>: <></>}

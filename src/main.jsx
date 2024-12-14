@@ -11,14 +11,6 @@ import {
   Services, 
   UpcomingCourses 
 } from "./pages/Home";
-import { 
-  CEP_Content, 
-  CEP_FAQs, 
-  CEP_Features, 
-  CEP_ImportantLinks, 
-  CEP_PreviousCourses, 
-  CEP_UpcomingCourses 
-} from "./pages/CEP_Page";
 import {
   QIP_FAQs,
   QIP_Features,
@@ -27,20 +19,15 @@ import {
   QIP_UpcomingCourses,
   QIP_content
 } from "./pages/QIP_Page/index.js";
-import { 
-  Exec_Training_Content,
-  Exec_Training_FAQs,
-  Exec_Training_Features,
-  Exec_Training_ImportantLinks,
-  Exec_Training_PreviousCourses,
-  Exec_Training_UpcomingCourses
- } from "./pages/Exec_Training_Page";
 import CertificateForm from './pages/Certificate/CertificateForm.jsx'
 import ContactUs from './pages/ContactUs/ContactUs.jsx'
 import Announcements from './pages/Home/Announcements.jsx'
 import Registration from './pages/Authentication/Registration.jsx'
 import CourseDetails from './pages/CourseDetails/CourseDetails.jsx'
 import { AuthContextProvider } from './context/authContext.jsx'
+import CourseForm from './components/CourseForm.jsx'
+import CEP_Page from './pages/CEP_Page/CEP_Page.jsx'
+import Exec_Training_Page from './pages/Exec_Training_Page/Exec_Training_Page.jsx'
 
 const router = createBrowserRouter([
   {
@@ -61,14 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/CEP",
-        element: <div>
-          <CEP_Content />
-          <CEP_Features />
-          <CEP_UpcomingCourses />
-          <CEP_ImportantLinks />
-          <CEP_PreviousCourses />
-          <CEP_FAQs />
-        </div>
+        element: <CEP_Page/>
       },
       {
         path: "/QIP",
@@ -83,14 +63,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/Exec_Training",
-        element: <div>
-          <Exec_Training_Content />
-          <Exec_Training_Features />
-          <Exec_Training_UpcomingCourses />
-          <Exec_Training_ImportantLinks />
-          <Exec_Training_PreviousCourses />
-          <Exec_Training_FAQs />
-        </div>
+        element: <Exec_Training_Page/>
       },
       {
         path: "/certificate",
@@ -107,6 +80,9 @@ const router = createBrowserRouter([
       {
         path: "/course/:id",
         element: <CourseDetails/>
+      },{
+        path: "/courseForm",
+        element:<CourseForm/>
       }
     ]
   }

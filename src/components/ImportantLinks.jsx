@@ -12,10 +12,10 @@ export default function ImportantLinks({importantLinks}) {
     <div>
       <ul role="list" className=" grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 mt-16">
         {importantLinks.map((link) => (
-         <li key={link.linkTitle} className="col-span-1 flex flex-col justify-between rounded-md shadow-sm text-gray-800 p-3 border">
+         <li key={link.linkName} className="col-span-1 flex flex-col justify-between rounded-md shadow-sm text-gray-800 p-3 border">
          <div>
            <h3 className='text-gray-900 font-semibold text-lg'>
-             {link.linkTitle}
+             {link.linkName}
            </h3>
            <p className='text-sm hyphens-auto'>{link.linkDescription}</p>
          </div>
