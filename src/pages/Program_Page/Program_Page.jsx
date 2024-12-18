@@ -4,6 +4,7 @@ import CEP_FAQs from "./CEP_FAQs";
 import CEP_Features from "./CEP_Features";
 import CEP_ImportantLinks from "./CEP_ImportantLinks";
 import CourseDisplaySection from "../../components/CourseDisplaySection";
+import { useParams } from "react-router-dom";
 
 const backend = import.meta.env.VITE_BACKEND_HOST;
 
@@ -34,7 +35,9 @@ async function fetchProgram(programName) {
   }
 }
 
-function CEP_Page() {
+function Program_Page() {
+  const {id} = useParams()
+
   const [previousCourses, setPreviousCourses] = useState([]);
   const [upcomingCourses, setupcomingCourses] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -44,9 +47,9 @@ function CEP_Page() {
   useEffect(() => {
     // function defination to get the courses form backend
 
-    async function fetchCourses() {
+    async function fetchCourses(programId) {
       try {
-        const response = await fetch(`${backend}/course/CEP`, {
+        const response = await fetch(`${backend}/course/${programId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -83,7 +86,7 @@ function CEP_Page() {
         console.log("Error in fetching courses: ", error.message);
       }
     }
-    fetchProgram("CEP").then((data)=>{
+    fetchProgram(id).then((data)=>{
       if(data?.data){
         console.log("reached here: ", data.data)
         setProgramData(data.data || {})
@@ -92,12 +95,12 @@ function CEP_Page() {
         setErrorMessage(data?.message || "Failed to load data")
       }
     })
-    fetchCourses();
-  }, []);
+    fetchCourses(id);
+  }, [id]);
   return (
     <div>
-      <CEP_Content />
-      <CEP_Features />
+      <CEP_Content title={programData.title} description={programData.description}/>
+      <CEP_Features title={programData.title} features={programData.features} featureDescription={programData.featuresDescription} />
       <CourseDisplaySection
         courses={upcomingCourses} 
         sectionTitle="Upcoming CEP Courses"
@@ -112,4 +115,4 @@ function CEP_Page() {
   );
 }
 
-export default CEP_Page;
+export default Program_Page;

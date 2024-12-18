@@ -9,10 +9,10 @@ import { useAuthContext } from "../context/authContext";
 
 const navigation = [
   // { name: 'Home', href: '/', title: "Home" },
-  { name: "CEP", href: "/CEP", title: "Continuing Education Programme" },
+  { name: "CEP", href: "/program/CEP", title: "Continuing Education Programme" },
   {
     name: "Executive-Training",
-    href: "/Exec_Training",
+    href: "program/ETP",
     title: "Executive-Training",
   },
   // { name: 'QIP', href: '/QIP', title: "Quality Improvement Programme" },
