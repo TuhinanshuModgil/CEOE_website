@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 const backend = import.meta.env.VITE_BACKEND_HOST;
 
 const AddProgramForm = ({ programId = "" }) => {
-//   const { id } = useParams();
+  //   const { id } = useParams();
   const [formData, setFormData] = useState({
     title: "",
     featuresDescription: "",
@@ -15,15 +15,15 @@ const AddProgramForm = ({ programId = "" }) => {
   });
 
   // Fetch the program data to prefill the form
-//   useEffect(() => {
-//     fetch(`${backend}/program/${id}`)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         // console.log("This is data: ", data)
-//         setFormData(data.data);
-//       })
-//       .catch((error) => console.error("Error fetching program data:", error));
-//   }, [programId]);
+  //   useEffect(() => {
+  //     fetch(`${backend}/program/${id}`)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         // console.log("This is data: ", data)
+  //         setFormData(data.data);
+  //       })
+  //       .catch((error) => console.error("Error fetching program data:", error));
+  //   }, [programId]);
 
   // Handle input changes dynamically
   const handleChange = (e) => {
@@ -72,7 +72,27 @@ const AddProgramForm = ({ programId = "" }) => {
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
-      .then((data) => console.log("Program Added:", data))
+      .then((data) => {
+        if(data.data){
+          alert(data.message)
+          console.log("Program Added:", data);
+
+          // reset form data when programm added succesfully 
+          setFormData({
+            title: "",
+            featuresDescription: "",
+            features: [{ featureTitle: "", featureDescription: "" }],
+            name: "",
+            importantLinks: [{ linkName: "", linkDescription: "", href: "" }],
+            description: "",
+            faqs: [{ question: "", answer: "" }],
+          })
+
+        }
+        else{
+          alert("Failed to add program: " + data.message)
+        }
+      })
       .catch((error) => console.error("Error updating program:", error));
   };
 
@@ -86,6 +106,7 @@ const AddProgramForm = ({ programId = "" }) => {
         <input
           type="text"
           name="title"
+          required={true}
           value={formData.title}
           className="mx-4"
           onChange={handleChange}
@@ -97,6 +118,7 @@ const AddProgramForm = ({ programId = "" }) => {
         <input
           type="text"
           name="name"
+          required={true}
           className="mx-4"
           value={formData.name}
           onChange={handleChange}
@@ -108,6 +130,7 @@ const AddProgramForm = ({ programId = "" }) => {
         <textarea
           name="description"
           value={formData.description}
+          required={true}
           className="min-h-32 w-full"
           onChange={handleChange}
         />
@@ -131,6 +154,7 @@ const AddProgramForm = ({ programId = "" }) => {
             <input
               type="text"
               className="mx-4"
+              required={true}
               value={feature.featureTitle}
               onChange={(e) =>
                 handleNestedChange(e, index, "features", "featureTitle")
@@ -142,6 +166,7 @@ const AddProgramForm = ({ programId = "" }) => {
             <input
               className="mx-4"
               type="text"
+              required={true}
               value={feature.featureDescription}
               onChange={(e) =>
                 handleNestedChange(e, index, "features", "featureDescription")
@@ -176,6 +201,7 @@ const AddProgramForm = ({ programId = "" }) => {
               type="text"
               className="mx-4"
               value={link.linkName}
+              required={true}
               onChange={(e) =>
                 handleNestedChange(e, index, "importantLinks", "linkName")
               }
@@ -186,6 +212,7 @@ const AddProgramForm = ({ programId = "" }) => {
             <input
               type="text"
               className="mx-4"
+              required={true}
               value={link.linkDescription}
               onChange={(e) =>
                 handleNestedChange(
@@ -203,6 +230,7 @@ const AddProgramForm = ({ programId = "" }) => {
               type="text"
               className="mx-4"
               value={link.href}
+              required={true}
               onChange={(e) =>
                 handleNestedChange(e, index, "importantLinks", "href")
               }
@@ -234,6 +262,7 @@ const AddProgramForm = ({ programId = "" }) => {
             <input
               className="mx-4"
               type="text"
+              required={true}
               value={faq.question}
               onChange={(e) => handleNestedChange(e, index, "faqs", "question")}
             />
@@ -243,6 +272,7 @@ const AddProgramForm = ({ programId = "" }) => {
             <input
               type="text"
               className="mx-4"
+              required={true}
               value={faq.answer}
               onChange={(e) => handleNestedChange(e, index, "faqs", "answer")}
             />

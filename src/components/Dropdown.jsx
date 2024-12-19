@@ -11,11 +11,11 @@ import { Navigate, NavLink } from 'react-router-dom'
 
 
 
-export default function Dropdown({options}) {
+export default function Dropdown({options, dropdownTitle=""}) {
   return (
     <Popover className="relative">
       <PopoverButton className="inline-flex items-center gap-x-1 text-base font-semibold leading-6 text-gray-700">
-        <span>Others</span>
+        <span>{dropdownTitle}</span>
         <ChevronDownIcon aria-hidden="true" className="size-5" />
       </PopoverButton>
 

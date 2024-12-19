@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 const backend = import.meta.env.VITE_BACKEND_HOST;
 
 const AddCourseForm = () => {
-
-  const { courseId } = useParams();
   const [formData, setFormData] = useState({
     name: "",
     mode: "Online",
@@ -22,7 +20,6 @@ const AddCourseForm = () => {
     paymentLinks: [{ linkName: "", linkDescription: "", href: "" }],
     brocherLink: "",
   });
-  console.log("components moundeted");
 
 
   const handleChange = (e) => {
@@ -69,19 +66,42 @@ const AddCourseForm = () => {
       }
     }
 
-    const endpoint = `${backend}/course/add`;
-
-    fetch(endpoint, {
+    fetch(`${backend}/course/add`, {
       method:"POST",
       credentials: "include", 
       body: formDataToSend,
     })
       .then((res) => res.json())
       .then((data) => {
+        if(data.data) {
+          alert(
+            "Course added successfully!"
+            );
 
-        alert(
-        "Course added successfully!"
-        );
+          // reset form when course is added successfully 
+          setFormData({
+            name: "",
+            mode: "Online",
+            status: "upcoming",
+            programName: "",
+            courseCode: "",
+            description: "",
+            image: null,
+            imageAlt: "",
+            faculties: [""],
+            eligibility: [""],
+            startDate: "",
+            endDate: "",
+            paymentInstructions: "",
+            paymentLinks: [{ linkName: "", linkDescription: "", href: "" }],
+            brocherLink: "",
+          })
+
+        }
+        else{
+          alert("Failed to add course: "+ data.message)
+        }
+        
       })
       .catch((error) => console.error("Error submitting form:", error));
   };
@@ -234,7 +254,7 @@ const AddCourseForm = () => {
         <input type="date" name="endDate" value={formData.endDate} onChange={handleChange} required />
       </label>
 
-      <button type="submit">Update Course</button>
+      <button type="submit">Add Course</button>
     </form>
   );
 };

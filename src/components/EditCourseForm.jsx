@@ -30,20 +30,25 @@ const EditCourseForm = () => {
       fetch(`${backend}/course/single/${courseId}`)
         .then((res) => res.json())
         .then((data) => {
-            
-          data = data?.data;
-          // Populate fields for editing
-          setFormData({
-            ...data,
-            faculties: data.faculties || [""],
-            eligibility: data.eligibility || [""],
-            paymentLinks: data.paymentLinks || [
-              { linkName: "", linkDescription: "", href: "" },
-            ],
-            startDate: new Date(data.startDate).toISOString().split("T")[0],
-            endDate: new Date(data.endDate).toISOString().split("T")[0],
-          });
-        //   console.log("this is data: ", data);
+          if (data.data) {
+            data = data?.data;
+            // Populate fields for editing
+            setFormData({
+              ...data,
+              faculties: data.faculties || [""],
+              eligibility: data.eligibility || [""],
+              paymentLinks: data.paymentLinks || [
+                { linkName: "", linkDescription: "", href: "" },
+              ],
+              startDate: new Date(data.startDate).toISOString().split("T")[0],
+              endDate: new Date(data.endDate).toISOString().split("T")[0],
+            });
+          }
+          else{
+            alert("Failed to fetch course data: "+ data.message)
+          }
+
+          //   console.log("this is data: ", data);
           setLoading(false);
         })
         .catch((error) => {
@@ -104,7 +109,12 @@ const EditCourseForm = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert("Course updated successfully!");
+        if(data.data){
+          alert("Course updated successfully!");
+        }
+        else{
+          alert("Failed to edit course: " + data.message)
+        }
       })
       .catch((error) => console.error("Error updating course:", error));
   };

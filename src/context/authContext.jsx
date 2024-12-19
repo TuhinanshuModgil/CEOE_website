@@ -8,6 +8,7 @@ export const useAuthContext = () => {
 
 export const AuthContextProvider = ({ children }) => {
   // check if the user is logged in intitally
+  const [userAdmin, setUserAdmin] = useState(false)
   const [userLoggedIn, setUserLoggedIn] = useState(parseCookies());
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -69,6 +70,7 @@ export const AuthContextProvider = ({ children }) => {
         console.log("User Login Succesfully", data)
         setSuccessMessage(data.message);
         setUserLoggedIn(true)
+        setUserAdmin(data?.data?.admin)
         return true
         // localStorage.setItem('token', data.token); // Save token for authentication
       } else {
@@ -98,6 +100,7 @@ export const AuthContextProvider = ({ children }) => {
           console.log("User Logout Succesfully", data)
           setSuccessMessage(data.message);
           setUserLoggedIn(false)
+          setUserAdmin(false)
           return true
           // localStorage.setItem('token', data.token); // Save token for authentication
         } else {
@@ -112,7 +115,7 @@ export const AuthContextProvider = ({ children }) => {
       }
   }
 
-  return <AuthContext.Provider value={{handleRegisterUser, userLoggedIn, handleLogout , handleLogin}}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{handleRegisterUser, userLoggedIn, handleLogout , handleLogin, userAdmin}}>{children}</AuthContext.Provider>;
 };
 
 const parseCookies = () => {

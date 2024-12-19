@@ -19,8 +19,15 @@ const EditProgramForm = ({ programId = "" }) => {
     fetch(`${backend}/program/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        // console.log("This is data: ", data)
-        setFormData(data.data);
+        if(data.data){
+          console.log("This is data: ", data)
+          setFormData(data.data);
+          
+        }
+        else{
+          console.log("This is data: ", data)
+          alert("Failed to get program: "+ data.message)
+        }
       })
       .catch((error) => console.error("Error fetching program data:", error));
   }, [programId]);
@@ -72,7 +79,14 @@ const EditProgramForm = ({ programId = "" }) => {
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
-      .then((data) => console.log("Program updated:", data))
+      .then((data) => {
+        if(data.data){
+          console.log("Program updated:", data)
+        }
+        else{
+          alert("Failed to edit program:" + data.message)
+        }
+      })
       .catch((error) => console.error("Error updating program:", error));
   };
 

@@ -11,8 +11,8 @@ export default function ImportantLinks({importantLinks}) {
             
     <div>
       <ul role="list" className=" grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 mt-16">
-        {importantLinks.map((link) => (
-         <li key={link.linkName} className="col-span-1 flex flex-col justify-between rounded-md shadow-sm text-gray-800 p-3 border">
+        {importantLinks.map((link, index) => (
+         <li key={link.linkName + index} className="col-span-1 flex flex-col justify-between rounded-md shadow-sm text-gray-800 p-3 border">
          <div>
            <h3 className='text-gray-900 font-semibold text-lg'>
              {link.linkName}

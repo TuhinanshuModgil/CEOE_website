@@ -22,6 +22,7 @@ export default function RegisterModal({handleSignupToggle}) {
         handleSignupToggle()
       }
     })
+    .catch((err => console.log("Error in registering: ", err.message)))
 
 
   }

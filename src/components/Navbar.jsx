@@ -19,6 +19,10 @@ const navigation = [
   // { name: 'Other', href: '/others', title: "" },
   { name: "Contact Us", href: "/contactus", title: "" },
 ];
+const adminOptions= [
+  { name: "Add Program", description: "Add New Program", href: "/programAddForm" },
+  { name: "Add Course", description: "Add New Course", href: "/courseAddForm" },
+]
 
 const othersOptions = [
   { name: "QIP", description: "Quality Improvement Programme", href: "/QIP" },
@@ -30,7 +34,8 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginModlalOpen, setLoginModalOpen] = useState(false);
   const [signupModalOpen, setSignupModalOpen] = useState(false);
-  const { userLoggedIn, handleLogout } = useAuthContext();
+  const { userLoggedIn, handleLogout, userAdmin } = useAuthContext();
+  console.log("User Admin: ", userAdmin)
   console.log("User Logged In: ", userLoggedIn);
   function handleLoginToggle() {
     setLoginModalOpen((prev) => !prev);
@@ -79,7 +84,8 @@ export default function Navbar() {
               <div title={item?.title}>{item.name}</div>
             </NavLink>
           ))}
-          <Dropdown options={othersOptions} />
+          <Dropdown options={othersOptions} dropdownTitle="Others" />
+          {userAdmin? <Dropdown options={adminOptions} dropdownTitle="Admin Options"/>: <></>}
           {userLoggedIn ? (
             <>
             <button onClick={handleLogout}>Logout</button>
@@ -130,7 +136,8 @@ export default function Navbar() {
                     {item.name}
                   </NavLink>
                 ))}
-                <Dropdown options={othersOptions} />
+                <Dropdown options={othersOptions} dropdownTitle="Others" />
+                {userAdmin? <Dropdown options={adminOptions} dropdownTitle="Admin Options"/>: <></>}
                 <button>Login</button>
                 <button>Register</button>
               </div>

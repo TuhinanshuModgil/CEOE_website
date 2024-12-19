@@ -13,8 +13,8 @@ export default function CourseDisplaySection({ courses, sectionTitle="" }) {
         </div>
         <div className="mx-auto mt-16 grid grid-flow-col auto-cols-[80%] sm:auto-cols-[40%] lg:auto-cols-[31%] gap-3 overflow-x-auto overscroll-x-contain">
           {courses.map((course) => (
-            <NavLink to={`/course/${course._id}`} key={course._id}>
-              <article className="flex flex-col items-start justify-between border p-4 rounded-2xl shadow">
+            <NavLink to={`/course/${course._id}`} key={course._id}    >
+              <article className="flex flex-col items-start justify-start border p-4 rounded-2xl shadow h-full">
                 <div className="relative w-full">
                   <img
                     // src={course.image}
@@ -26,8 +26,8 @@ export default function CourseDisplaySection({ courses, sectionTitle="" }) {
                 </div>
                 <div className="max-w-xl">
                   <div className="mt-8 flex items-center gap-x-4 text-xs">
-                    <time dateTime={course.startDate} className="text-gray-500">
-                      {course.startDate}
+                    <time dateTime={new Date(course.startDate).toISOString().split("T")[0]} className="text-gray-500">
+                      {new Date(course.startDate).toISOString().split("T")[0]}
                     </time>
                     <p className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
                       {course.mode}

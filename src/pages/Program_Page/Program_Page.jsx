@@ -21,7 +21,7 @@ async function fetchProgram(programName) {
     if (response.ok) {
       const data = await response.json();
       console.log("Program Data Fetched", data);
-      return data
+      return data;
       // localStorage.setItem('token', data.token); // Save token for authentication
     } else {
       const errorData = await response.json();
@@ -30,19 +30,24 @@ async function fetchProgram(programName) {
       return errorData;
     }
   } catch (error) {
-    console.log("Erro while fetching programe ", programName, " ", error.message)
-    throw new Error("Failed to get program")
+    console.log(
+      "Erro while fetching programe ",
+      programName,
+      " ",
+      error.message
+    );
+    throw new Error("Failed to get program");
   }
 }
 
 function Program_Page() {
-  const {id} = useParams()
+  const { id } = useParams();
 
   const [previousCourses, setPreviousCourses] = useState([]);
   const [upcomingCourses, setupcomingCourses] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [programData, setProgramData] = useState("")
+  const [programData, setProgramData] = useState("");
 
   useEffect(() => {
     // function defination to get the courses form backend
@@ -86,31 +91,45 @@ function Program_Page() {
         console.log("Error in fetching courses: ", error.message);
       }
     }
-    fetchProgram(id).then((data)=>{
-      if(data?.data){
-        console.log("reached here: ", data.data)
-        setProgramData(data.data || {})
-      }
-      else{
-        setErrorMessage(data?.message || "Failed to load data")
+    fetchProgram(id).then((data) => {
+      if (data?.data) {
+        console.log("reached here: ", data.data);
+        setProgramData(data.data || {});
+      } else {
+        setErrorMessage(data?.message || "Failed to load data");
       }
     })
+    .catch(err => console.log("Error in fetching program: ", err.message));
     fetchCourses(id);
   }, [id]);
   return (
     <div>
-      <CEP_Content title={programData.title} description={programData.description}/>
-      <CEP_Features title={programData.title} features={programData.features} featureDescription={programData.featuresDescription} />
+      <CEP_Content
+        title={programData.title}
+        description={programData.description}
+      />
+      {programData?.features?.length !== 0 ? (
+        <CEP_Features
+          title={programData.title}
+          features={programData.features}
+          featureDescription={programData.featuresDescription}
+        />
+      ) : (
+        <></>
+      )}
+
       <CourseDisplaySection
-        courses={upcomingCourses} 
+        courses={upcomingCourses}
         sectionTitle="Upcoming CEP Courses"
       />
-      <CEP_ImportantLinks importantLinks={programData?.importantLinks ?? []} />
+      {programData?.importantLinks?.length !== 0 ? <CEP_ImportantLinks importantLinks={programData?.importantLinks ?? []} />: <></>}
+      
       <CourseDisplaySection
         courses={previousCourses}
         sectionTitle="Previous CEP Courses"
       />
-      <CEP_FAQs  faqs={programData?.faqs ?? []}/>
+      {programData?.faqs?.length !== 0 ?<CEP_FAQs faqs={programData?.faqs ?? []} />: <></> }
+      
     </div>
   );
 }
