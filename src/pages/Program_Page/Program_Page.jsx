@@ -91,15 +91,16 @@ function Program_Page() {
         console.log("Error in fetching courses: ", error.message);
       }
     }
-    fetchProgram(id).then((data) => {
-      if (data?.data) {
-        console.log("reached here: ", data.data);
-        setProgramData(data.data || {});
-      } else {
-        setErrorMessage(data?.message || "Failed to load data");
-      }
-    })
-    .catch(err => console.log("Error in fetching program: ", err.message));
+    fetchProgram(id)
+      .then((data) => {
+        if (data?.data) {
+          console.log("reached here: ", data.data);
+          setProgramData(data.data || {});
+        } else {
+          setErrorMessage(data?.message || "Failed to load data");
+        }
+      })
+      .catch((err) => console.log("Error in fetching program: ", err.message));
     fetchCourses(id);
   }, [id]);
   return (
@@ -117,19 +118,36 @@ function Program_Page() {
       ) : (
         <></>
       )}
+      {upcomingCourses?.length !== 0 ? (
+        <CourseDisplaySection
+          courses={upcomingCourses}
+          sectionTitle="Upcoming CEP Courses"
+        />
+      ) : (
+        <></>
+      )}
 
-      <CourseDisplaySection
-        courses={upcomingCourses}
-        sectionTitle="Upcoming CEP Courses"
-      />
-      {programData?.importantLinks?.length !== 0 ? <CEP_ImportantLinks importantLinks={programData?.importantLinks ?? []} />: <></>}
-      
-      <CourseDisplaySection
-        courses={previousCourses}
-        sectionTitle="Previous CEP Courses"
-      />
-      {programData?.faqs?.length !== 0 ?<CEP_FAQs faqs={programData?.faqs ?? []} />: <></> }
-      
+      {programData?.importantLinks?.length !== 0 ? (
+        <CEP_ImportantLinks
+          importantLinks={programData?.importantLinks ?? []}
+        />
+      ) : (
+        <></>
+      )}
+      {previousCourses?.length !== 0 ? (
+        <CourseDisplaySection
+          courses={previousCourses}
+          sectionTitle="Previous CEP Courses"
+        />
+      ) : (
+        <></>
+      )}
+
+      {programData?.faqs?.length !== 0 ? (
+        <CEP_FAQs faqs={programData?.faqs ?? []} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

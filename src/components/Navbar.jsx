@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
@@ -6,6 +6,7 @@ import Dropdown from "./Dropdown";
 import LoginModal from "./auth/LoginModal";
 import RegisterModal from "./auth/RegisterModal";
 import { useAuthContext } from "../context/authContext";
+import { use } from "react";
 
 const navigation = [
   // { name: 'Home', href: '/', title: "Home" },
@@ -23,17 +24,19 @@ const adminOptions= [
   { name: "Add Program", description: "Add New Program", href: "/programAddForm" },
   { name: "Add Course", description: "Add New Course", href: "/courseAddForm" },
 ]
-
+const defaultOtherOptions = [{ name: "Certifcates", href: "/certificate", description: "Certifcates" }]
 const othersOptions = [
   { name: "QIP", description: "Quality Improvement Programme", href: "/QIP" },
   { name: "Workshops", description: "Workshops", href: "/" },
   { name: "Certifcates", href: "/certificate", description: "Certifcates" },
 ];
+const backend = import.meta.env.VITE_BACKEND_HOST;
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginModlalOpen, setLoginModalOpen] = useState(false);
   const [signupModalOpen, setSignupModalOpen] = useState(false);
+  const [othersOptions, setOthersOptions] = useState([...defaultOtherOptions ])
   const { userLoggedIn, handleLogout, userAdmin } = useAuthContext();
   console.log("User Admin: ", userAdmin)
   console.log("User Logged In: ", userLoggedIn);
@@ -44,6 +47,37 @@ export default function Navbar() {
   function handleSignupToggle() {
     setSignupModalOpen((prev) => !prev);
   }
+
+  useEffect(()=>{
+    fetch(`${backend}/program`, {
+      method:"GET",
+      credentials: "include"
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if(data.data) {
+          console.log("Data: ", data)
+          const optionData = []
+          data.data?.forEach((elem)=> {
+            if(elem.name !== "CEP" && elem.name !== "ETP"){
+              optionData.push({
+                name: elem.title,
+                href: "program/" + elem.name, 
+                description: elem.title
+              })
+            }
+             
+          })
+
+          setOthersOptions([...defaultOtherOptions, ...optionData])
+        }
+        // else{
+        //   alert("Failed to get data: "+ data.message)
+        // }
+        
+      })
+      .catch((error) => console.error("Error submitting form:", error));
+  }, [])
 
   return (
     <header className="bg-white border-b fixed top-0 z-10 right-0 left-0 ">
