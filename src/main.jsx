@@ -25,12 +25,14 @@ import Announcements from "./pages/Home/Announcements.jsx";
 import Registration from "./pages/Authentication/Registration.jsx";
 import CourseDetails from "./pages/CourseDetails/CourseDetails.jsx";
 import { AuthContextProvider } from "./context/authContext.jsx";
-import CourseForm from "./components/CourseForm.jsx";
+// import CourseForm from "./components/CourseForm.jsx";
 import CEP_Page from "./pages/CEP_Page/CEP_Page.jsx";
 import Exec_Training_Page from "./pages/Exec_Training_Page/Exec_Training_Page.jsx";
 import Program_Page from "./pages/Program_Page/Program_Page.jsx";
 import EditProgramForm from "./components/EditProgramForm.jsx";
 import AddProgramForm from "./components/AddProgramForn.jsx";
+import EditCourseForm from "./components/EditCourseForm.jsx";
+import AddCourseForm from "./components/AddCourseForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -93,8 +95,12 @@ const router = createBrowserRouter([
         element: <CourseDetails />,
       },
       {
-        path: "/courseForm",
-        element: <CourseForm />,
+        path: "/courseEditForm/:courseId",
+        element: <EditCourseForm/>,
+      },
+      {
+        path: "/courseAddForm",
+        element: <AddCourseForm/>,
       },
       {
         path: "/programEditForm/:id",

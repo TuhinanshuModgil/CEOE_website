@@ -1,10 +1,13 @@
-
-import { useEffect, useState } from 'react'
-import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/20/solid'
-import { Radio, RadioGroup } from '@headlessui/react'
-import { ShieldCheckIcon } from '@heroicons/react/24/outline'
-import { useParams } from 'react-router-dom'
-import ImportantLinks from '../../components/ImportantLinks'
+import { useEffect, useState } from "react";
+import {
+  CheckIcon,
+  QuestionMarkCircleIcon,
+  StarIcon,
+} from "@heroicons/react/20/solid";
+import { Radio, RadioGroup } from "@headlessui/react";
+import { ShieldCheckIcon } from "@heroicons/react/24/outline";
+import { useParams } from "react-router-dom";
+import ImportantLinks from "../../components/ImportantLinks";
 
 const backend = import.meta.env.VITE_BACKEND_HOST;
 
@@ -33,20 +36,19 @@ const backend = import.meta.env.VITE_BACKEND_HOST;
 //   ],
 //   brocherLink: 'https://google.com'
 // }
-const reviews = { average: 4, totalCount: 1624 }
+const reviews = { average: 4, totalCount: 1624 };
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function CourseDetails() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [courseDetails, setCourseDetails] = useState({})
-    const {id} = useParams()
+  const [courseDetails, setCourseDetails] = useState({});
+  const { id } = useParams();
 
-
-  useEffect(()=>{
+  useEffect(() => {
     async function fetchCourses() {
       try {
         const response = await fetch(`${backend}/course/single/${id}`, {
@@ -61,9 +63,13 @@ export default function CourseDetails() {
           const data = await response.json();
           console.log("Data fetching Succesfully", data);
           setSuccessMessage(data.message);
-          
-          
-          setCourseDetails(data.data)
+
+          setCourseDetails({
+            ...data?.data,
+            startDate: new Date(data?.data?.startDate).toISOString().split("T")[0],
+            endDate: new Date(data?.data?.endDate).toISOString().split("T")[0],
+          });
+
           // console.log(This )
           return true;
           // localStorage.setItem('token', data.token); // Save token for authentication
@@ -77,10 +83,9 @@ export default function CourseDetails() {
         console.log("Error in fetching courses: ", error.message);
       }
     }
-    fetchCourses()
-  }
-    , [])
-//   const [selectedSize, setSelectedSize] = useState(courseDetails.sizes[0])
+    fetchCourses();
+  }, []);
+  //   const [selectedSize, setSelectedSize] = useState(courseDetails.sizes[0])
 
   return (
     <div className="bg-white mt-16">
@@ -112,7 +117,9 @@ export default function CourseDetails() {
           </nav> */}
 
           <div className="mt-4">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{courseDetails.name}</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              {courseDetails.name}
+            </h1>
           </div>
 
           <section aria-labelledby="information-heading" className="mt-4">
@@ -121,76 +128,111 @@ export default function CourseDetails() {
             </h2>
 
             <div className="flex items-center">
-              <p className="text-gray-700 "> <span className='text-gray-600'>Course Code: </span> {courseDetails.courseCode}</p>
+              <p className="text-gray-700 ">
+                {" "}
+                <span className="text-gray-600">Course Code: </span>{" "}
+                {courseDetails.courseCode}
+              </p>
 
               <div className="ml-4 border-l border-gray-300 pl-4">
                 <h2 className="sr-only">Mode</h2>
                 <div className="flex items-center">
-                <span className='text-gray-600'>Mode: {courseDetails.mode}</span>
-               
+                  <span className="text-gray-600">
+                    Mode: {courseDetails.mode}
+                  </span>
                 </div>
               </div>
             </div>
 
             <div className="mt-4 space-y-6">
-              <p className="text-base text-gray-600">{courseDetails.description}</p>
-                <h3 className='text-gray-600'><span className='font-semibold text-gray-600'> Faculties: </span> {courseDetails?.faculties?.join(", ")}</h3>
+              <p className="text-base text-gray-600">
+                {courseDetails.description}
+              </p>
+              <h3 className="text-gray-600">
+                <span className="font-semibold text-gray-600">
+                  {" "}
+                  Faculties:{" "}
+                </span>{" "}
+                {courseDetails?.faculties?.join(", ")}
+              </h3>
             </div>
 
-            <div className='mt-4 text-base text-gray-500'>
-                <h3><span className='font-semibold text-gray-600'>Start Date: </span>{courseDetails?.startDate?? "-"}</h3>
-                <h3><span className='font-semibold text-gray-600'>End Date: </span>{courseDetails?.startDate?? "-"}</h3>
+            <div className="mt-4 text-base text-gray-500">
+              <h3>
+                <span className="font-semibold text-gray-600">
+                  Start Date:{" "}
+                </span>
+                {courseDetails?.startDate ?? "-"}
+              </h3>
+              <h3>
+                <span className="font-semibold text-gray-600">End Date: </span>
+                {courseDetails?.endDate ?? "-"}
+              </h3>
             </div>
-            <div className='mt-6 text-base text-gray-500'>
-                <h3 className='font-semibold text-gray-800 text-lg'>Eligibility </h3>
-                <ul className='list-disc'>
-
-                {courseDetails?.eligibility?.map((element, idx)=>(
-                    <li className='' key={idx}>
-                        {element}
-                    </li>
+            <div className="mt-6 text-base text-gray-500">
+              <h3 className="font-semibold text-gray-800 text-lg">
+                Eligibility{" "}
+              </h3>
+              <ul className="list-disc">
+                {courseDetails?.eligibility?.map((element, idx) => (
+                  <li className="" key={idx}>
+                    {element}
+                  </li>
                 ))}
-                </ul>
+              </ul>
             </div>
-
           </section>
         </div>
 
         {/* courseDetails image */}
         <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
-          <img alt={courseDetails.imageAlt} src={courseDetails?.image?.data} className="aspect-square w-full rounded-lg object-cover" />
+          <img
+            alt={courseDetails.imageAlt}
+            src={courseDetails?.image?.data}
+            className="aspect-square w-full rounded-lg object-cover"
+          />
         </div>
 
-        {courseDetails.brocherLink ? <a href={courseDetails.brocherLink} className='text-blue-500 underline mt-4'>Downlaod Brocher</a>: <></>}
+        {courseDetails.brocherLink ? (
+          <a
+            href={courseDetails.brocherLink}
+            target="_blank"
+            className="text-blue-500 underline mt-4"
+          >
+            Downlaod Brocher
+          </a>
+        ) : (
+          <></>
+        )}
         {/* courseDetails form */}
-        
       </div>
 
-      <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 border-t'>
-      <div className="mt-4">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">Payment Instructions</h1>
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 border-t">
+        <div className="mt-4">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+            Payment Instructions
+          </h1>
+        </div>
+
+        <section aria-labelledby="information-heading" className="mt-4">
+          <h2 id="information-heading" className="sr-only">
+            Payment Instructions
+          </h2>
+
+          <div className="mt-4 space-y-6">
+            <p className="text-base text-gray-600">
+              {courseDetails?.paymentInstructions}
+            </p>
           </div>
 
-          <section aria-labelledby="information-heading" className="mt-4">
-            <h2 id="information-heading" className="sr-only">
-              Payment Instructions
-            </h2>
-
-            <div className="mt-4 space-y-6">
-              <p className="text-base text-gray-600">{courseDetails?.paymentInstructions}</p>
-            </div>
-
-            {/* <div className='mt-4 text-base text-gray-500'>
+          {/* <div className='mt-4 text-base text-gray-500'>
                 <h3><span className='font-semibold text-gray-600'>Start Date: </span>{courseDetails?.startDate?? "-"}</h3>
                 <h3><span className='font-semibold text-gray-600'>End Date: </span>{courseDetails?.startDate?? "-"}</h3>
             </div> */}
-            
-                <ImportantLinks importantLinks={courseDetails?.paymentLinks??[]}/>
 
-
-
-          </section>
+          <ImportantLinks importantLinks={courseDetails?.paymentLinks ?? []} />
+        </section>
       </div>
     </div>
-  )
+  );
 }

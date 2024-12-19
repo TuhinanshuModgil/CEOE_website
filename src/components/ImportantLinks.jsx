@@ -19,7 +19,7 @@ export default function ImportantLinks({importantLinks}) {
            </h3>
            <p className='text-sm hyphens-auto'>{link.linkDescription}</p>
          </div>
-           <a href={link.href} className='font-semibold mt-2 text-blue-500 underline'>Open link</a>
+           <a href={link.href} target="_blank" className='font-semibold mt-2 text-blue-500 underline'>Open link</a>
      </li>
         ))}
       </ul>
