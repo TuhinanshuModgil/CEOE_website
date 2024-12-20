@@ -34,10 +34,8 @@ const backend = import.meta.env.VITE_BACKEND_HOST;
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [loginModlalOpen, setLoginModalOpen] = useState(false);
-  const [signupModalOpen, setSignupModalOpen] = useState(false);
   const [othersOptions, setOthersOptions] = useState([...defaultOtherOptions ])
-  const { userLoggedIn, handleLogout, userAdmin } = useAuthContext();
+  const { userLoggedIn, handleLogout, userAdmin, loginModlalOpen, setLoginModalOpen, signupModalOpen, setSignupModalOpen } = useAuthContext();
   console.log("User Admin: ", userAdmin)
   console.log("User Logged In: ", userLoggedIn);
   function handleLoginToggle() {

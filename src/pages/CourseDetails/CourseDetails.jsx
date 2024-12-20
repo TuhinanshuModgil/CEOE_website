@@ -8,6 +8,7 @@ import { Radio, RadioGroup } from "@headlessui/react";
 import { ShieldCheckIcon } from "@heroicons/react/24/outline";
 import { useParams } from "react-router-dom";
 import ImportantLinks from "../../components/ImportantLinks";
+import { useAuthContext } from "../../context/authContext";
 
 const backend = import.meta.env.VITE_BACKEND_HOST;
 
@@ -46,8 +47,12 @@ export default function CourseDetails() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [courseDetails, setCourseDetails] = useState({});
+  const { userLoggedIn, loginModlalOpen, setLoginModalOpen, signupModalOpen, setSignupModalOpen } = useAuthContext();
   const { id } = useParams();
 
+  const handleBrocherSignup = ()=>{
+    setSignupModalOpen(true)
+  }
   useEffect(() => {
     async function fetchCourses() {
       try {
@@ -66,7 +71,9 @@ export default function CourseDetails() {
 
           setCourseDetails({
             ...data?.data,
-            startDate: new Date(data?.data?.startDate).toISOString().split("T")[0],
+            startDate: new Date(data?.data?.startDate)
+              .toISOString()
+              .split("T")[0],
             endDate: new Date(data?.data?.endDate).toISOString().split("T")[0],
           });
 
@@ -169,7 +176,7 @@ export default function CourseDetails() {
                 {courseDetails?.endDate ?? "-"}
               </h3>
             </div>
-            <div className="mt-6 text-base text-gray-500">
+            <div className="mt-6 text-base text-gray-500 mb-4">
               <h3 className="font-semibold text-gray-800 text-lg">
                 Eligibility{" "}
               </h3>
@@ -180,6 +187,26 @@ export default function CourseDetails() {
                   </li>
                 ))}
               </ul>
+            </div>
+            <div className="flex flex-col items-start">
+            {userLoggedIn ? (
+          courseDetails.brocherLink ? (
+            <a
+              href={courseDetails.brocherLink}
+              target="_blank"
+              className="text-blue-500 underline mt-4"
+            >
+              Downlaod Brocher
+            </a>
+          ) : (
+            <></>
+          )
+        ) : (
+          <>
+          <button  className="text-blue-500 underline mb-2" onClick={handleBrocherSignup}>Download Brocher</button>
+          <p className="text-gray-800 bg-red-200 px-2 border border-red-400 rounded-lg">Note: Login required in order to view course brocher</p>
+          </>
+        )}
             </div>
           </section>
         </div>
@@ -192,18 +219,8 @@ export default function CourseDetails() {
             className="aspect-square w-full rounded-lg object-cover"
           />
         </div>
-
-        {courseDetails.brocherLink ? (
-          <a
-            href={courseDetails.brocherLink}
-            target="_blank"
-            className="text-blue-500 underline mt-4"
-          >
-            Downlaod Brocher
-          </a>
-        ) : (
-          <></>
-        )}
+        
+        {/* {} */}
         {/* courseDetails form */}
       </div>
 

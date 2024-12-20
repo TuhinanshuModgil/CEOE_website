@@ -4,7 +4,7 @@ import { useAuthContext } from "../../context/authContext";
 export default function LoginModal({ handleLoginToogle }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { handleLogin } = useAuthContext();
+  const { handleLogin, setLoginModalOpen, setSignupModalOpen } = useAuthContext();
   function handleUserLogin(event) {
     event.preventDefault()
     console.log("emailemail: ",email)
@@ -16,6 +16,13 @@ export default function LoginModal({ handleLoginToogle }) {
       }
     })
 
+   
+
+  }
+
+  function handleLoginToRegister(){
+    setSignupModalOpen(prev=> true)
+    setLoginModalOpen(prev=> false)
   }
 
   return (
@@ -132,12 +139,12 @@ export default function LoginModal({ handleLoginToogle }) {
             </form>
             <p className="mt-8 text-center text-sm/6 text-gray-500">
               Dont have an account?{" "}
-              <a
-                href="#"
+              <button
+                onClick={handleLoginToRegister}
                 className="font-semibold text-indigo-600 hover:text-indigo-500"
               >
                 Register
-              </a>
+              </button>
             </p>
           </div>
         </div>

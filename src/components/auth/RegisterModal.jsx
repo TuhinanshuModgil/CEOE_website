@@ -5,7 +5,7 @@ export default function RegisterModal({handleSignupToggle}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  const {handleRegisterUser} = useAuthContext()
+  const {handleRegisterUser, setLoginModalOpen, setSignupModalOpen} = useAuthContext()
 
 
   
@@ -25,6 +25,10 @@ export default function RegisterModal({handleSignupToggle}) {
     .catch((err => console.log("Error in registering: ", err.message)))
 
 
+  }
+  function handleRegisterToLogin(){
+    setSignupModalOpen(prev=> false)
+    setLoginModalOpen(prev=> true)
   }
 
   return (
@@ -141,12 +145,13 @@ export default function RegisterModal({handleSignupToggle}) {
             </form>
             <p className="mt-8 text-center text-sm/6 text-gray-500">
             Already have an account?{" "}
-            <a
-              href="#"
+            <button
+              type="button"
+              onClick={handleRegisterToLogin}
               className="font-semibold text-indigo-600 hover:text-indigo-500"
             >
               Login
-            </a>
+            </button>
           </p>
            
           </div>

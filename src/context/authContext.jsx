@@ -10,6 +10,8 @@ export const AuthContextProvider = ({ children }) => {
   // check if the user is logged in intitally
   const [userAdmin, setUserAdmin] = useState(false)
   const [userLoggedIn, setUserLoggedIn] = useState(parseCookies());
+  const [loginModlalOpen, setLoginModalOpen] = useState(false);
+  const [signupModalOpen, setSignupModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const backend =  import.meta.env.VITE_BACKEND_HOST
@@ -115,7 +117,7 @@ export const AuthContextProvider = ({ children }) => {
       }
   }
 
-  return <AuthContext.Provider value={{handleRegisterUser, userLoggedIn, handleLogout , handleLogin, userAdmin}}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{handleRegisterUser, userLoggedIn, handleLogout , handleLogin, userAdmin, loginModlalOpen, setLoginModalOpen, signupModalOpen, setSignupModalOpen}}>{children}</AuthContext.Provider>;
 };
 
 const parseCookies = () => {

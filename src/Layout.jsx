@@ -9,7 +9,7 @@ function Layout() {
     <>
     <Navbar/>
     <ScrollToTop/>
-    <Outlet />
+    <Outlet  />
     <Footer/>
     </>
   )
