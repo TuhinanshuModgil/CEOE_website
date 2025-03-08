@@ -121,7 +121,7 @@ function Program_Page() {
       {upcomingCourses?.length !== 0 ? (
         <CourseDisplaySection
           courses={upcomingCourses}
-          sectionTitle="Upcoming CEP Courses"
+          sectionTitle={`Upcoming ${id} Courses`}
         />
       ) : (
         <></>
@@ -137,7 +137,7 @@ function Program_Page() {
       {previousCourses?.length !== 0 ? (
         <CourseDisplaySection
           courses={previousCourses}
-          sectionTitle="Previous CEP Courses"
+          sectionTitle={`Previous ${id} Courses`}
         />
       ) : (
         <></>

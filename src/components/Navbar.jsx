@@ -83,7 +83,7 @@ export default function Navbar() {
         className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8 text-base font-semibold leading-6 text-gray-700"
         aria-label="Global"
       >
-        <a href="/" className="-m-1.5 p-1.5 flex gap-4 items-center">
+        <NavLink href="/" className="-m-1.5 p-1.5 flex gap-4 items-center" to="/">
           <span className="sr-only">Your Company</span>
           <img src="/iitrprlogo.png" alt="IIT Ropar Logo" className="h-12" />
           <div>
@@ -95,7 +95,7 @@ export default function Navbar() {
             </h1>
             {/* <p className='text-gray-500'></p> */}
           </div>
-        </a>
+        </NavLink>
         <div className="flex lg:hidden">
           <button
             type="button"

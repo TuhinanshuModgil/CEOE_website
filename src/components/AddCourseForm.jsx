@@ -107,15 +107,15 @@ const AddCourseForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data" className="bg-white text-gray-800 pt-28 flex flex-col gap-4 px-4">
+    <form onSubmit={handleSubmit} encType="multipart/form-data" className="bg-white text-gray-800 pt-28 flex flex-col gap-4 px-4 py-2">
       <label>
         Course Name:
-        <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+        <input type="text" name="name" className="bg-white p-2 border rounded-md  ml-2" value={formData.name} onChange={handleChange} required  />
       </label>
 
       <label>
         Mode:
-        <select name="mode" value={formData.mode} onChange={handleChange}>
+        <select name="mode" value={formData.mode} onChange={handleChange} className="bg-white p-2 border rounded-md  ml-2">
           <option value="Online">Online</option>
           <option value="Offline">Offline</option>
           <option value="Hybrid">Hybrid</option>
@@ -124,7 +124,7 @@ const AddCourseForm = () => {
 
       <label>
         Status:
-        <select name="status" value={formData.status} onChange={handleChange}>
+        <select name="status" value={formData.status} onChange={handleChange} className="bg-white p-2 border rounded-md  ml-2">
           <option value="upcoming">Upcoming</option>
           <option value="ongoing">Ongoing</option>
           <option value="previous">Previous</option>
@@ -133,27 +133,27 @@ const AddCourseForm = () => {
 
       <label>
         Program Name:
-        <input type="text" name="programName" value={formData.programName} onChange={handleChange} required />
+        <input type="text" name="programName" value={formData.programName} onChange={handleChange} required className="bg-white p-2 border rounded-md  ml-2"/>
       </label>
 
       <label>
         Course Code:
-        <input type="text" name="courseCode" value={formData.courseCode} onChange={handleChange} required />
+        <input type="text" name="courseCode" value={formData.courseCode} onChange={handleChange} required className="bg-white p-2 border rounded-md  ml-2" />
       </label>
 
       <label>
         Description:
-        <textarea name="description" value={formData.description} onChange={handleChange} required />
+        <textarea name="description" value={formData.description} onChange={handleChange} required   className="bg-white p-2 border rounded-md  ml-2"/>
       </label>
 
       <label>
         Image (Optional):
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+        <input type="file" accept="image/*" onChange={handleFileChange}   className="bg-white p-2 border rounded-md  ml-2"/>
       </label>
 
       <label>
         Image Alt Text:
-        <input type="text" name="imageAlt" value={formData.imageAlt} onChange={handleChange} />
+        <input type="text" name="imageAlt" value={formData.imageAlt} onChange={handleChange}  className="bg-white p-2 border rounded-md  ml-2" />
       </label>
 
       <label>
@@ -163,12 +163,12 @@ const AddCourseForm = () => {
             <input
               type="text"
               value={faculty}
-              onChange={(e) => handleArrayChange(e, index, "faculties")}
+              onChange={(e) => handleArrayChange(e, index, "faculties")} className="bg-white p-2 border rounded-md "
             />
-            <button type="button" onClick={() => removeNestedField("faculties", index)}>Remove</button>
+            <button type="button" onClick={() => removeNestedField("faculties", index)} className="bg-red-400 p-1 border rounded-md ml-2">Remove</button>
           </div>
         ))}
-        <button type="button" onClick={() => addNestedField("faculties", "")}>
+        <button type="button" onClick={() => addNestedField("faculties", "")} className="bg-green-300 p-1 border rounded-md mt-2">
           Add Faculty
         </button>
       </label>
@@ -180,13 +180,13 @@ const AddCourseForm = () => {
             <input
               type="text"
               value={eligibility}
-              onChange={(e) => handleArrayChange(e, index, "eligibility")}
+              onChange={(e) => handleArrayChange(e, index, "eligibility")} className="bg-white p-2 border rounded-md  ml-2"
             />
-            <button type="button" onClick={() => removeNestedField("eligibility", index)}>Remove</button>
+            <button type="button" onClick={() => removeNestedField("eligibility", index)} className="bg-red-400 p-1 border rounded-md ml-2">Remove</button>
           </div>
         ))}
-        <button type="button" onClick={() => addNestedField("eligibility", "")}>
-          Add Eligibility
+        <button type="button" onClick={() => addNestedField("eligibility", "")} className="bg-green-300 p-1 border rounded-md mt-2">
+          Add Eligibility 
         </button>
       </label>
 
@@ -196,7 +196,7 @@ const AddCourseForm = () => {
           name="paymentInstructions"
           value={formData.paymentInstructions}
           onChange={handleChange}
-          required
+          required className="bg-white p-2 border rounded-md  ml-2"
         />
       </label>
 
@@ -209,26 +209,26 @@ const AddCourseForm = () => {
               placeholder="Link Name"
               value={link.linkName}
               onChange={(e) => handleNestedChange(e, index, "paymentLinks", "linkName")}
-              required
+              required className="bg-white p-2 border rounded-md  ml-2"
             />
             <input
               type="text"
               placeholder="Link Description"
               value={link.linkDescription}
               onChange={(e) => handleNestedChange(e, index, "paymentLinks", "linkDescription")}
-              required
+              required className="bg-white p-2 border rounded-md  ml-2"
             />
             <input
               type="url"
               placeholder="Link URL"
               value={link.href}
               onChange={(e) => handleNestedChange(e, index, "paymentLinks", "href")}
-              required
+              required className="bg-white p-2 border rounded-md  ml-2"
             />
-            <button type="button" onClick={() => removeNestedField("paymentLinks", index)}>Remove</button>
+            <button type="button" onClick={() => removeNestedField("paymentLinks", index)} className="bg-red-400 p-1 border rounded-md ml-2">Remove</button>
           </div>
         ))}
-        <button type="button" onClick={() => addNestedField("paymentLinks", { linkName: "", linkDescription: "", href: "" })}>
+        <button type="button" onClick={() => addNestedField("paymentLinks", { linkName: "", linkDescription: "", href: "" })} className="bg-green-300 p-1 border rounded-md mt-2">
           Add Payment Link
         </button>
       </label>
@@ -240,21 +240,23 @@ const AddCourseForm = () => {
           name="brocherLink"
           value={formData.brocherLink}
           onChange={handleChange}
-          required
+          required className="bg-white p-2 border rounded-md  ml-2"
         />
       </label>
 
       <label>
         Start Date:
-        <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} required />
+        <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} required  className="bg-white p-2 border rounded-md  ml-2"/>
       </label>
 
       <label>
         End Date:
-        <input type="date" name="endDate" value={formData.endDate} onChange={handleChange} required />
+        <input type="date" name="endDate" value={formData.endDate} onChange={handleChange} required  className="bg-white p-2 border rounded-md  ml-2"/>
       </label>
+        <div >
 
-      <button type="submit">Add Course</button>
+        <button  type="submit" className="bg-purple-400 p-2 border border-gray-500 rounded-md ">Add Course</button>
+        </div>
     </form>
   );
 };

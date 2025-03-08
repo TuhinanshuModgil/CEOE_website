@@ -108,7 +108,7 @@ const AddProgramForm = ({ programId = "" }) => {
           name="title"
           required={true}
           value={formData.title}
-          className="mx-4"
+          className="mx-4 bg-white p-2 border rounded-md"
           onChange={handleChange}
         />
       </label>
@@ -119,7 +119,7 @@ const AddProgramForm = ({ programId = "" }) => {
           type="text"
           name="name"
           required={true}
-          className="mx-4"
+          className="mx-4 bg-white p-2 border rounded-md"
           value={formData.name}
           onChange={handleChange}
         />
@@ -131,7 +131,7 @@ const AddProgramForm = ({ programId = "" }) => {
           name="description"
           value={formData.description}
           required={true}
-          className="min-h-32 w-full"
+          className="min-h-32 w-full bg-white p-2 border rounded-md"
           onChange={handleChange}
         />
       </label>
@@ -141,7 +141,7 @@ const AddProgramForm = ({ programId = "" }) => {
         <textarea
           name="featuresDescription"
           value={formData.featuresDescription}
-          className="min-h-16 w-full"
+          className="min-h-16 w-full bg-white p-2 border rounded-md"
           onChange={handleChange}
         />
       </label>
@@ -153,7 +153,7 @@ const AddProgramForm = ({ programId = "" }) => {
             Feature Title:
             <input
               type="text"
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               required={true}
               value={feature.featureTitle}
               onChange={(e) =>
@@ -164,7 +164,7 @@ const AddProgramForm = ({ programId = "" }) => {
           <label>
             Feature Description:
             <input
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               type="text"
               required={true}
               value={feature.featureDescription}
@@ -186,7 +186,7 @@ const AddProgramForm = ({ programId = "" }) => {
         <button
           type="button"
           onClick={() => addNestedField("features")}
-          className="bg-blue-500 p-2 rounded-md font-bold"
+          className="bg-blue-500 p-2 rounded-md "
         >
           Add Feature
         </button>
@@ -199,7 +199,7 @@ const AddProgramForm = ({ programId = "" }) => {
             Link Name:
             <input
               type="text"
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               value={link.linkName}
               required={true}
               onChange={(e) =>
@@ -211,7 +211,7 @@ const AddProgramForm = ({ programId = "" }) => {
             Link Description:
             <input
               type="text"
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               required={true}
               value={link.linkDescription}
               onChange={(e) =>
@@ -228,7 +228,7 @@ const AddProgramForm = ({ programId = "" }) => {
             Href:
             <input
               type="text"
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               value={link.href}
               required={true}
               onChange={(e) =>
@@ -247,7 +247,7 @@ const AddProgramForm = ({ programId = "" }) => {
       ))}
       <div>
         <button
-          className="bg-blue-500 p-2 rounded-md font-bold"
+          className="bg-blue-500 p-2 rounded-md "
           type="button"
           onClick={() => addNestedField("importantLinks")}
         >
@@ -260,7 +260,7 @@ const AddProgramForm = ({ programId = "" }) => {
           <label>
             Question:
             <input
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md" 
               type="text"
               required={true}
               value={faq.question}
@@ -271,7 +271,7 @@ const AddProgramForm = ({ programId = "" }) => {
             Answer:
             <input
               type="text"
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               required={true}
               value={faq.answer}
               onChange={(e) => handleNestedChange(e, index, "faqs", "answer")}
