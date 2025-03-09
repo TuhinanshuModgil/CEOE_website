@@ -4,6 +4,8 @@ import { useAuthContext } from "../../context/authContext";
 export default function LoginModal({ handleLoginToogle }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("")
+  const [showErrorMessage, setShowErrorMessage] = useState(false)
   const { handleLogin, setLoginModalOpen, setSignupModalOpen } = useAuthContext();
   function handleUserLogin(event) {
     event.preventDefault()
@@ -11,11 +13,20 @@ export default function LoginModal({ handleLoginToogle }) {
     // console.log("password: ", password)
 
     handleLogin( email, password).then((res)=>{
+
       if(res){
+        setErrorMessage("")
+        setShowErrorMessage(false)
         handleLoginToogle()
       }
+      else{
+        setErrorMessage("Invalid credentials, please try again")
+        setShowErrorMessage(true)
+      }
     })
-
+    .catch((e)=>{
+      console.log("This is login error: ", e)
+    })
    
 
   }
@@ -119,12 +130,14 @@ export default function LoginModal({ handleLoginToogle }) {
 
               <div className="flex items-center justify-between">
                 <div className="text-sm/6">
-                  <a
+                
+                {showErrorMessage? <p className="text-red-500">{errorMessage}</p>: <></>}
+                  {/* <a
                     href="#"
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot password?
-                  </a>
+                  </a> */}
                 </div>
               </div>
 

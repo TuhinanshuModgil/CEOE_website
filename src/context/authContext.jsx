@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -82,6 +82,7 @@ export const AuthContextProvider = ({ children }) => {
         return false
       }
     } catch (error) {
+      console.log("Login error: ", error)
       setErrorMessage("Failed to connect to the server");
       return false
     }
@@ -117,8 +118,31 @@ export const AuthContextProvider = ({ children }) => {
       }
   }
 
+  useEffect(() => {
+    fetch(`${backend}/auth/user`, {
+      method: "GET",
+      credentials: "include", // Important to include cookies
+    })
+      .then((res) => {
+        console.log("Verification res: ", res)
+        if(res.ok){
+          const data = res.json()
+          setUserLoggedIn(true)
+
+        }
+        else{
+          setUserLoggedIn(false)
+        }
+
+      })
+      .catch((error) => {
+        console.log('Verifying User Error: ', error)
+      });
+  }, []);
+
   return <AuthContext.Provider value={{handleRegisterUser, userLoggedIn, handleLogout , handleLogin, userAdmin, loginModlalOpen, setLoginModalOpen, signupModalOpen, setSignupModalOpen}}>{children}</AuthContext.Provider>;
 };
+
 
 const parseCookies = () => {
   const cookieString = document.cookie; // Get cookies as a string
