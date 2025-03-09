@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { ShieldCheckIcon } from "@heroicons/react/24/outline";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import ImportantLinks from "../../components/ImportantLinks";
 import { useAuthContext } from "../../context/authContext";
 
@@ -47,7 +47,7 @@ export default function CourseDetails() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [courseDetails, setCourseDetails] = useState({});
-  const { userLoggedIn, loginModlalOpen, setLoginModalOpen, signupModalOpen, setSignupModalOpen } = useAuthContext();
+  const { userLoggedIn, loginModlalOpen, setLoginModalOpen, signupModalOpen, setSignupModalOpen, userAdmin } = useAuthContext();
   const { id } = useParams();
 
   const handleBrocherSignup = ()=>{
@@ -155,6 +155,12 @@ export default function CourseDetails() {
               <p className="text-base text-gray-600">
                 {courseDetails.description}
               </p>
+              {userAdmin ? <div className="w-full flex justify-center top-28">
+                      <NavLink to={`/courseEditForm/${id}`} >
+                        <button className="bg-blue-500 p-2 rounded-md ">Edit Course Details</button>
+                      </NavLink>
+                    </div>: <></>
+                    }
               <h3 className="text-gray-600">
                 <span className="font-semibold text-gray-600">
                   {" "}

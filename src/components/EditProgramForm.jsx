@@ -101,7 +101,7 @@ const EditProgramForm = ({ programId = "" }) => {
           type="text"
           name="title"
           value={formData.title}
-          className="mx-4"
+          className="mx-4 bg-white p-2 border rounded-md"
           onChange={handleChange}
         />
       </label>
@@ -111,7 +111,7 @@ const EditProgramForm = ({ programId = "" }) => {
         <input
           type="text"
           name="name"
-          className="mx-4"
+          className="mx-4 bg-white p-2 border rounded-md"
           value={formData.name}
           onChange={handleChange}
         />
@@ -122,7 +122,7 @@ const EditProgramForm = ({ programId = "" }) => {
         <textarea
           name="description"
           value={formData.description}
-          className="min-h-32 w-full"
+          className="min-h-32 w-full mt-2 bg-white p-2 border rounded-md"
           onChange={handleChange}
         />
       </label>
@@ -134,7 +134,7 @@ const EditProgramForm = ({ programId = "" }) => {
             Feature Title:
             <input
               type="text"
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               value={feature.featureTitle}
               onChange={(e) =>
                 handleNestedChange(e, index, "features", "featureTitle")
@@ -144,7 +144,7 @@ const EditProgramForm = ({ programId = "" }) => {
           <label>
             Feature Description:
             <input
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               type="text"
               value={feature.featureDescription}
               onChange={(e) =>
@@ -165,7 +165,7 @@ const EditProgramForm = ({ programId = "" }) => {
         <button
           type="button"
           onClick={() => addNestedField("features")}
-          className="bg-blue-500 p-2 rounded-md font-bold"
+          className="bg-blue-500 p-2 rounded-md "
         >
           Add Feature
         </button>
@@ -178,7 +178,7 @@ const EditProgramForm = ({ programId = "" }) => {
             Link Name:
             <input
               type="text"
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               value={link.linkName}
               onChange={(e) =>
                 handleNestedChange(e, index, "importantLinks", "linkName")
@@ -189,7 +189,7 @@ const EditProgramForm = ({ programId = "" }) => {
             Link Description:
             <input
               type="text"
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               value={link.linkDescription}
               onChange={(e) =>
                 handleNestedChange(
@@ -205,7 +205,7 @@ const EditProgramForm = ({ programId = "" }) => {
             Href:
             <input
               type="text"
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               value={link.href}
               onChange={(e) =>
                 handleNestedChange(e, index, "importantLinks", "href")
@@ -223,7 +223,7 @@ const EditProgramForm = ({ programId = "" }) => {
       ))}
       <div>
         <button
-          className="bg-blue-500 p-2 rounded-md font-bold"
+          className="bg-blue-500 p-2 rounded-md "
           type="button"
           onClick={() => addNestedField("importantLinks")}
         >
@@ -236,7 +236,7 @@ const EditProgramForm = ({ programId = "" }) => {
           <label>
             Question:
             <input
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               type="text"
               value={faq.question}
               onChange={(e) => handleNestedChange(e, index, "faqs", "question")}
@@ -246,7 +246,7 @@ const EditProgramForm = ({ programId = "" }) => {
             Answer:
             <input
               type="text"
-              className="mx-4"
+              className="mx-4 bg-white p-2 border rounded-md"
               value={faq.answer}
               onChange={(e) => handleNestedChange(e, index, "faqs", "answer")}
             />
@@ -262,7 +262,7 @@ const EditProgramForm = ({ programId = "" }) => {
       ))}
       <div>
         <button
-          className="bg-blue-500 p-2 rounded-md font-bold"
+          className="bg-blue-500 p-2 rounded-md"
           type="button"
           onClick={() => addNestedField("faqs")}
         >
@@ -270,7 +270,7 @@ const EditProgramForm = ({ programId = "" }) => {
         </button>
       </div>
       <div className="">
-        <button type="submit" className="bg-blue-500 p-2 rounded-md font-bold">
+        <button type="submit" className="bg-blue-500 p-2 rounded-md">
           Update Program
         </button>
       </div>

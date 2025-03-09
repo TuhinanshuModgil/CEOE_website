@@ -4,7 +4,8 @@ import CEP_FAQs from "./CEP_FAQs";
 import CEP_Features from "./CEP_Features";
 import CEP_ImportantLinks from "./CEP_ImportantLinks";
 import CourseDisplaySection from "../../components/CourseDisplaySection";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
+import { useAuthContext } from "../../context/authContext";
 
 const backend = import.meta.env.VITE_BACKEND_HOST;
 
@@ -42,7 +43,7 @@ async function fetchProgram(programName) {
 
 function Program_Page() {
   const { id } = useParams();
-
+  const {userAdmin} = useAuthContext()
   const [previousCourses, setPreviousCourses] = useState([]);
   const [upcomingCourses, setupcomingCourses] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -105,10 +106,17 @@ function Program_Page() {
   }, [id]);
   return (
     <div>
+      {userAdmin ? <div className="absolute z-10 w-full flex justify-center top-28">
+        <NavLink to={`/programEditForm/${id}`} >
+          <button className="bg-blue-500 p-2 rounded-md ">Edit Program Details</button>
+        </NavLink>
+      </div>: <></>
+      }
       <CEP_Content
         title={programData.title}
         description={programData.description}
       />
+      
       {programData?.features?.length !== 0 ? (
         <CEP_Features
           title={programData.title}

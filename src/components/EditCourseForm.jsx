@@ -137,12 +137,13 @@ const EditCourseForm = () => {
           value={formData.name}
           onChange={handleChange}
           required
+          className="mx-2 bg-white p-2 border rounded-md"
         />
       </label>
 
       <label>
         Mode:
-        <select name="mode" value={formData.mode} onChange={handleChange}>
+        <select name="mode" value={formData.mode} onChange={handleChange} className="mx-2 bg-white p-2 border rounded-md">
           <option value="Online">Online</option>
           <option value="Offline">Offline</option>
           <option value="Hybrid">Hybrid</option>
@@ -151,7 +152,7 @@ const EditCourseForm = () => {
 
       <label>
         Status:
-        <select name="status" value={formData.status} onChange={handleChange}>
+        <select name="status" value={formData.status} onChange={handleChange} className="mx-2 bg-white p-2 border rounded-md">
           <option value="upcoming">Upcoming</option>
           <option value="ongoing">Ongoing</option>
           <option value="previous">Previous</option>
@@ -166,6 +167,7 @@ const EditCourseForm = () => {
           value={formData.programName}
           onChange={handleChange}
           required
+          className="mx-2 bg-white p-2 border rounded-md"
         />
       </label>
 
@@ -177,6 +179,7 @@ const EditCourseForm = () => {
           value={formData.courseCode}
           onChange={handleChange}
           required
+          className="mx-2 bg-white p-2 border rounded-md"
         />
       </label>
 
@@ -187,12 +190,13 @@ const EditCourseForm = () => {
           value={formData.description}
           onChange={handleChange}
           required
+          className=" mt-2 bg-white p-2 border rounded-md w-full"
         />
       </label>
 
       <label>
         Image (Optional):
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+        <input type="file" accept="image/*" onChange={handleFileChange} className="mx-2 bg-white p-2 border rounded-md" />
       </label>
 
       <label>
@@ -201,6 +205,7 @@ const EditCourseForm = () => {
           type="text"
           name="imageAlt"
           value={formData.imageAlt}
+          className="mx-2 bg-white p-2 border rounded-md"
           onChange={handleChange}
         />
       </label>
@@ -208,21 +213,23 @@ const EditCourseForm = () => {
       <label>
         Faculties:
         {formData.faculties.map((faculty, index) => (
-          <div key={index}>
+          <div key={index} className="mt-2">
             <input
               type="text"
               value={faculty}
+              className=" bg-white p-2 border rounded-md"
               onChange={(e) => handleArrayChange(e, index, "faculties")}
             />
             <button
               type="button"
+               className="bg-red-400 p-2 border rounded-md mx-2"
               onClick={() => removeNestedField("faculties", index)}
             >
               Remove
             </button>
           </div>
         ))}
-        <button type="button" onClick={() => addNestedField("faculties", "")}>
+        <button type="button" onClick={() => addNestedField("faculties", "")}  className="bg-blue-400 mt-2 p-2 border rounded-md">
           Add Faculty
         </button>
       </label>
@@ -233,18 +240,20 @@ const EditCourseForm = () => {
           <div key={index}>
             <input
               type="text"
+              className="mt-2 bg-white p-2 border rounded-md"
               value={eligibility}
               onChange={(e) => handleArrayChange(e, index, "eligibility")}
             />
             <button
               type="button"
+               className="bg-red-400 mx-2 p-2 border rounded-md"
               onClick={() => removeNestedField("eligibility", index)}
             >
               Remove
             </button>
           </div>
         ))}
-        <button type="button" onClick={() => addNestedField("eligibility", "")}>
+        <button type="button" onClick={() => addNestedField("eligibility", "") }  className="bg-blue-400 mt-2 p-2 border rounded-md">
           Add Eligibility
         </button>
       </label>
@@ -256,13 +265,14 @@ const EditCourseForm = () => {
           value={formData.paymentInstructions}
           onChange={handleChange}
           required
+          className="mt-2 bg-white p-2 border rounded-md w-full"
         />
       </label>
 
       <label>
         Payment Links:
         {formData.paymentLinks.map((link, index) => (
-          <div key={index}>
+          <div key={index} className="mt-2">
             <input
               type="text"
               placeholder="Link Name"
@@ -271,10 +281,12 @@ const EditCourseForm = () => {
                 handleNestedChange(e, index, "paymentLinks", "linkName")
               }
               required
+              className=" bg-white p-2 border rounded-md"
             />
             <input
               type="text"
               placeholder="Link Description"
+              className="mx-2 bg-white p-2 border rounded-md"
               value={link.linkDescription}
               onChange={(e) =>
                 handleNestedChange(e, index, "paymentLinks", "linkDescription")
@@ -284,6 +296,7 @@ const EditCourseForm = () => {
             <input
               type="url"
               placeholder="Link URL"
+              className="mx-2 bg-white p-2 border rounded-md"
               value={link.href}
               onChange={(e) =>
                 handleNestedChange(e, index, "paymentLinks", "href")
@@ -292,6 +305,7 @@ const EditCourseForm = () => {
             />
             <button
               type="button"
+              className="bg-red-400 p-2 border rounded-md"
               onClick={() => removeNestedField("paymentLinks", index)}
             >
               Remove
@@ -300,6 +314,7 @@ const EditCourseForm = () => {
         ))}
         <button
           type="button"
+           className="bg-blue-400 mt-2 p-2 border rounded-md"
           onClick={() =>
             addNestedField("paymentLinks", {
               linkName: "",
@@ -317,6 +332,7 @@ const EditCourseForm = () => {
         <input
           type="url"
           name="brocherLink"
+          className="mx-2 bg-white p-2 border rounded-md"
           value={formData.brocherLink}
           onChange={handleChange}
           required
@@ -328,6 +344,7 @@ const EditCourseForm = () => {
         <input
           type="date"
           name="startDate"
+          className="mx-2 bg-white p-2 border rounded-md"
           value={formData.startDate}
           onChange={handleChange}
           required
@@ -339,13 +356,16 @@ const EditCourseForm = () => {
         <input
           type="date"
           name="endDate"
+          className="mx-2 bg-white p-2 border rounded-md"
           value={formData.endDate}
           onChange={handleChange}
           required
         />
       </label>
+          <div className="mb-2">
 
-      <button type="submit">Update Course</button>
+      <button type="submit"  className="bg-green-400 p-2 border rounded-md">Update Course</button>
+          </div>
     </form>
   );
 };
