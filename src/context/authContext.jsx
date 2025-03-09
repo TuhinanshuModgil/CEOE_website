@@ -126,14 +126,21 @@ export const AuthContextProvider = ({ children }) => {
       .then((res) => {
         console.log("Verification res: ", res)
         if(res.ok){
-          const data = res.json()
-          setUserLoggedIn(true)
+          return res.json()
+          
 
         }
         else{
           setUserLoggedIn(false)
         }
 
+      })
+      .then(data=>{
+        console.log("Verification data: ", data)
+        setUserLoggedIn(true)
+        if(data.data.admin){
+          setUserAdmin(true)
+        }
       })
       .catch((error) => {
         console.log('Verifying User Error: ', error)
