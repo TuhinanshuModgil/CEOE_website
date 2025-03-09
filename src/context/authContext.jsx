@@ -8,13 +8,13 @@ export const useAuthContext = () => {
 
 export const AuthContextProvider = ({ children }) => {
   // check if the user is logged in intitally
-  const [userAdmin, setUserAdmin] = useState(false)
+  const [userAdmin, setUserAdmin] = useState(false);
   const [userLoggedIn, setUserLoggedIn] = useState(parseCookies());
   const [loginModlalOpen, setLoginModalOpen] = useState(false);
   const [signupModalOpen, setSignupModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const backend =  import.meta.env.VITE_BACKEND_HOST
+  const backend = import.meta.env.VITE_BACKEND_HOST;
 
   //
   async function handleRegisterUser(fullName, email, password) {
@@ -35,20 +35,20 @@ export const AuthContextProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("User Registered Succesfully", data)
+        console.log("User Registered Succesfully", data);
         setSuccessMessage(data.message);
-        setUserLoggedIn(true)
-        return true
+        setUserLoggedIn(true);
+        return true;
         // localStorage.setItem('token', data.token); // Save token for authentication
       } else {
         const errorData = await response.json();
         console.log("Resgister failed", errorData);
         setErrorMessage(errorData.message || "An error occurred");
-        return false
+        return false;
       }
     } catch (error) {
       setErrorMessage("Failed to connect to the server");
-      return false
+      return false;
     }
   }
 
@@ -64,58 +64,58 @@ export const AuthContextProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ email, password}),
+        body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log("User Login Succesfully", data)
+        console.log("User Login Succesfully", data);
         setSuccessMessage(data.message);
-        setUserLoggedIn(true)
-        setUserAdmin(data?.data?.admin)
-        return true
+        setUserLoggedIn(true);
+        setUserAdmin(data?.data?.admin);
+        return true;
         // localStorage.setItem('token', data.token); // Save token for authentication
       } else {
         const errorData = await response.json();
         console.log("Login failed", errorData);
         setErrorMessage(errorData.message || "An error occurred");
-        return false
+        return false;
       }
     } catch (error) {
-      console.log("Login error: ", error)
+      console.log("Login error: ", error);
       setErrorMessage("Failed to connect to the server");
-      return false
+      return false;
     }
   }
 
   async function handleLogout() {
     try {
-        const response = await fetch(`${backend}/auth/logout`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
-  
-        if (response.ok) {
-          const data = await response.json();
-          console.log("User Logout Succesfully", data)
-          setSuccessMessage(data.message);
-          setUserLoggedIn(false)
-          setUserAdmin(false)
-          return true
-          // localStorage.setItem('token', data.token); // Save token for authentication
-        } else {
-          const errorData = await response.json();
-          console.log("Logout failed", errorData);
-          setErrorMessage(errorData.message || "An error occurred");
-          return false
-        }
-      } catch (error) {
-        setErrorMessage("Failed to connect to the server");
-        return false
+      const response = await fetch(`${backend}/auth/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("User Logout Succesfully", data);
+        setSuccessMessage(data.message);
+        setUserLoggedIn(false);
+        setUserAdmin(false);
+        return true;
+        // localStorage.setItem('token', data.token); // Save token for authentication
+      } else {
+        const errorData = await response.json();
+        console.log("Logout failed", errorData);
+        setErrorMessage(errorData.message || "An error occurred");
+        return false;
       }
+    } catch (error) {
+      setErrorMessage("Failed to connect to the server");
+      return false;
+    }
   }
 
   useEffect(() => {
@@ -124,32 +124,45 @@ export const AuthContextProvider = ({ children }) => {
       credentials: "include", // Important to include cookies
     })
       .then((res) => {
-        console.log("Verification res: ", res)
-        if(res.ok){
-          return res.json()
-          
-
+        console.log("Verification res: ", res);
+        if (res.ok) {
+          return res.json();
+        } else {
+          setUserLoggedIn(false);
         }
-        else{
-          setUserLoggedIn(false)
-        }
-
       })
-      .then(data=>{
-        console.log("Verification data: ", data)
-        setUserLoggedIn(true)
-        if(data.data.admin){
-          setUserAdmin(true)
+      .then((data) => {
+        if (data) {
+          console.log("Verification data: ", data);
+          setUserLoggedIn(true);
+          if (data.data.admin) {
+            setUserAdmin(true);
+          }
         }
       })
       .catch((error) => {
-        console.log('Verifying User Error: ', error)
+        console.log("Verifying User Error: ", error);
       });
   }, []);
 
-  return <AuthContext.Provider value={{handleRegisterUser, userLoggedIn, handleLogout , handleLogin, userAdmin, loginModlalOpen, setLoginModalOpen, signupModalOpen, setSignupModalOpen}}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        handleRegisterUser,
+        userLoggedIn,
+        handleLogout,
+        handleLogin,
+        userAdmin,
+        loginModlalOpen,
+        setLoginModalOpen,
+        signupModalOpen,
+        setSignupModalOpen,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
-
 
 const parseCookies = () => {
   const cookieString = document.cookie; // Get cookies as a string
